@@ -3,14 +3,9 @@
 //
 #include "Hogwards.h"
 
-#include <vector>
-#include <string>
-
-using namespace std;
-
 BEGIN_GAME
 
-CREATE WIZARD{
+    CREATE WIZARD{
             NAME : "Harry Pointer",
             HOUSE : "GryffinTOR",
             HP : 120
@@ -27,18 +22,31 @@ CREATE WIZARD{
                 HP : 85
         }
     ]
+
+    CREATE WIZARD {
+        NAME: "Darko Malfoy",
+        HOUSE: "Slythernet",
+        HP: 100
+    }
+
+    CREATE SPELL {
+        NAME: "spell_name",
+        ACTION: START
+                END
+    }
+            CREATE SPELLS [
+                SPELL {
+                    NAME: "spell_name",
+                    ACTION: START
+                    END
+                },
+                SPELL {
+                NAME: "spell_name",
+                    ACTION: START
+                    END
+                }
+    ]
     ;
-//CREATE WIZARD {
-//    NAME: "Darko Malfoy",
-//    HOUSE: "Slythernet",
-//    HP: 100
-//}
-//
-//CREATE SPELL {
-//    NAME: "spell_name",
-//    ACTION: START
-//            END
-//}
 //
 //DUEL
 

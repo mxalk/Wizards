@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int test() {
+void test() {
     Wizard tmp;
 
     ; tmp = Wizard {

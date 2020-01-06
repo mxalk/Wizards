@@ -4,4 +4,4 @@
 
 #include "Wizard.h"
 
-vector<Wizard> Wizard::wizards;
+vector<Wizard *> Wizard::wizards;
