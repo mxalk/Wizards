@@ -8,4 +8,6 @@ include_directories(.)
 add_executable(Wizards
         game.cpp
         game_translate.cpp
-        Hogwards.h)
+        Hogwards.h
+        classes/Wizard.cpp
+        classes/Wizard.h classes/debug.h)

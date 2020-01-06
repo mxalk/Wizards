@@ -3,3 +3,5 @@
 //
 
 #include "Wizard.h"
+
+vector<Wizard> Wizard::wizards;

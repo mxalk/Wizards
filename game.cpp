@@ -15,20 +15,19 @@ CREATE WIZARD{
             HOUSE : "GryffinTOR",
             HP : 120
     }
-    (initializer_list<Wizard>(), nullptr, 0)CREATE WIZARDS[
+    CREATE WIZARDS[
         WIZARD{
                 NAME : "HermioneGranger",
                 HOUSE : "Gryffindor",
                 HP : 120
-        }
-    (initializer_list<Wizard>(), nullptr, 0),
+        },
         WIZARD{
                 NAME : "LunaLovegood",
                 HOUSE : "Ravenclaw",
                 HP : 85
         }
-    (initializer_list<Wizard>(), nullptr, 0)
     ]
+    ;
 //CREATE WIZARD {
 //    NAME: "Darko Malfoy",
 //    HOUSE: "Slythernet",
