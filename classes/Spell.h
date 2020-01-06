@@ -4,6 +4,7 @@
 #pragma once
 
 #include "classes/debug.h"
+#include "Wizard.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -14,7 +15,7 @@ class Spell {
 public:
     static vector<Spell *> spells;
     string name;
-    void (*action)();
+    void (*action)(Wizard& attacker, Wizard& defender);
 
     Spell& operator=(const Spell& s) {
 #ifdef DEBUG

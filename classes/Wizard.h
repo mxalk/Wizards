@@ -15,10 +15,7 @@ public:
     static vector<Wizard *> wizards;
     string name, house;
     int hp;
-
-//    Wizard(){string, string, int};
-
-//    Wizard(std::initializer_list<>){};
+    bool wand = true;
 
     Wizard& operator=(const Wizard& w) {
 #ifdef DEBUG

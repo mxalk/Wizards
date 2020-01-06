@@ -34,19 +34,18 @@ void test() {
                   HP: 85
             }
     ]
-    ;
-//CREATE WIZARD {
-//    NAME: "Darko Malfoy",
-//    HOUSE: "Slythernet",
-//    HP: 100
-//}
-//
-//CREATE SPELL {
-//    NAME: "spell_name",
-//    ACTION: START
-//            END
-//}
-//
+
+    ; tmps = Spell {
+            .name = (false)?"": "test",
+            .action = (false)?[](Wizard& attacker, Wizard& defender){}:
+                    [](Wizard& attacker, Wizard& defender) {
+                ; attacker 25
+                ; defender 20
+                ; defender _
+                ; attacker ---α
+                ;Game::get_hp(defender)
+            ;}
+    }
 //DUEL
 
 }

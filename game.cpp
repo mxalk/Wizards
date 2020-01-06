@@ -32,6 +32,11 @@ BEGIN_GAME
     CREATE SPELL {
         NAME: "spell_name",
         ACTION: START
+                DAMAGE ATTACKER 25
+                HEAL DEFENDER 20
+                EQUIP DEFENDER _
+                EQUIP ATTACKER ---α
+                GET_HP(DEFENDER)
                 END
     }
             CREATE SPELLS [

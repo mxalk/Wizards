@@ -6,6 +6,7 @@
 #include "classes/debug.h"
 #include "classes/Wizard.h"
 #include "classes/Spell.h"
+#include "classes/Game.h"
 
 #define BEGIN_GAME int main() {Wizard tmpw; Spell tmps;
 #define END_GAME return 0;}
@@ -26,6 +27,17 @@
 
 #define SPELL tmps = Spell
 #define SPELLS Spell {}
-#define ACTION .action = (false)?[](){}
-#define START []() {
-#define END }
+#define ACTION .action = (false)?[](Wizard& attacker, Wizard& defender){}
+#define START [](Wizard& attacker, Wizard& defender) {
+#define END ;}
+//#define ---α true
+#define _ false
+#define ATTACKER attacker
+#define DEFENDER defender
+#define DAMAGE ;
+#define HEAL ;
+#define EQUIP ;
+#define GET_HP ;Game::get_hp
+#define GET_HOUSE ;Game::get_house
+#define GET_NAME ;Game::get_name
+#define HAS_WAND ;Game::has_wand
