@@ -9,26 +9,27 @@
 using namespace std;
 
 void test() {
-    Wizard tmp;
+    Wizard tmpw;
+    Spell tmps
 
-    ; tmp = Wizard {
+    ; tmpw = Wizard {
             .name = (false)?"": "Harry Pointer",
             .house = (false)?"": "GryffinTOR",
             .hp = (false)?0: 120
     }
 
-    ; WIZARDS [
-            Wizard {
+    ; Wizard {} [
+            tmpw = Wizard {
                     .name = (false)?"": "Harry Pointer",
                     .house = (false)?"": "GryffinTOR",
                     .hp = (false)?0: 120
             },
-            tmp = Wizard {
+            tmpw = Wizard {
                 NAME: "HermioneGranger",
                 HOUSE: "Gryffindor",
                 HP: 120
             },
-            tmp = Wizard {
+            tmpw = Wizard {
                   NAME: "LunaLovegood",
                   HOUSE: "Ravenclaw",
                   HP: 85
@@ -37,15 +38,22 @@ void test() {
 
     ; tmps = Spell {
             .name = (false)?"": "test",
-            .action = (false)?[](Wizard& attacker, Wizard& defender){}:
-                    [](Wizard& attacker, Wizard& defender) {
-                ; attacker 25
-                ; defender 20
-                ; defender _
-                ; attacker ---α
-                ;Game::get_hp(defender)
+                .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
+                        [](Wizard& attacker, Wizard& defender) -> void {
+//                ;HEAL attacker 25
+//                ;DAMAGE defender 20
+//                ;EQUIP defender _
+//                ;EQUIP attacker ---α
+                ; if ( Game::get_hp(defender) <= 20 ) {
+//                            DAMAGE DEFENDER 10
+                ; } else if ( Game::get_hp(defender) <= 50 ) {
+//                            DAMAGE DEFENDER 20
+                ; } else {
+//                            DAMAGE DEFENDER 30
+                ; }
             ;}
     }
+    ;
 //DUEL
 
 }

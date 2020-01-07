@@ -12,13 +12,12 @@
 
 using namespace std;
 
+class Wizard;
 class Spell {
 public:
     static vector<Spell *> all_spells;
     string name;
-//    function<void(Wizard &, Wizard &)> action;
     void (*action)(Wizard&, Wizard&);
-//    void (*action);
 
     Spell& operator=(const Spell& s);
     void operator[](Spell s);

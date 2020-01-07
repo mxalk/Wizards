@@ -6,8 +6,6 @@
 
 vector<Wizard *> Wizard::all_wizards;
 
-//vector<Spell *> Wizard::spells;
-
 Wizard& Wizard::operator=(const Wizard& w) {
 #ifdef DEBUG
     cout << "NEW WIZARD" << " " << w.name << " " << w.house << " " << w.hp << endl;

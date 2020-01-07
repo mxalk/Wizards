@@ -10,4 +10,9 @@ add_executable(Wizards
         game_translate.cpp
         Hogwards.h
         classes/Wizard.cpp
-        classes/Wizard.h classes/debug.h classes/Spell.cpp classes/Spell.h classes/Game.cpp classes/Game.h)
+        classes/Wizard.h
+        classes/debug.h
+        classes/Spell.cpp
+        classes/Spell.h
+        classes/Game.cpp
+        classes/Game.h)

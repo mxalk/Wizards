@@ -48,12 +48,20 @@
 #define OR Game::or_f
 #define NOT Game::not_f
 
-#define IF if (
-#define ELSE_IF else if (
-#define ELSE else {
+#define IF ;if (
+#define ELSE_IF ;} else if (
+#define ELSE ;} else {
 #define DO ) {
 
 #define FOR for (int i=0; i<
 #define ROUNDS ; i++
 
 #define SHOW cout<<
+
+
+// SPELL LEARNING
+
+#define MR
+#define MRS
+#define LEARN
+#define SPELL_NAME

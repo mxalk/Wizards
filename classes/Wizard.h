@@ -11,6 +11,7 @@
 
 using namespace std;
 
+class Spell;
 class Wizard {
 public:
     static vector<Wizard *> all_wizards;

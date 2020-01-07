@@ -12,8 +12,15 @@ Spell& Spell::operator=(const Spell& s) {
     cout << "NEW Spell" << " " << s.name << endl;
 #endif
     this->name = s.name;
+    this->action = s.action;
     all_spells.push_back(this);
     return *this;
 };
 void Spell::operator[](Spell s) {};
-Spell Spell::operator,(Spell) {return *this;};
+Spell Spell::operator,(Spell) {return *this;}
+
+//Spell::Spell(string name, void (*action)(Wizard &, Wizard &)) {
+//    this->name = name;
+//    this->action = action;
+//    Spell::all_spells.push_back(this);
+//};

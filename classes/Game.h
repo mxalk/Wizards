@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "classes/Wizard.h";
+#include "classes/Wizard.h"
 #include <stdarg.h>
 
 class Game {
@@ -25,6 +25,8 @@ public:
         va_end(vl);
         return true;
     };
-    static bool or_f(bool arg1, bool arg2, bool...) {};
+    static bool or_f(bool arg1, bool arg2, bool...) {
+
+    };
     static bool not_f(bool arg) { return !arg; };
 };
