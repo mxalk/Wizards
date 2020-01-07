@@ -4,32 +4,28 @@
 #pragma once
 
 #include "classes/debug.h"
-#include "Wizard.h"
+#include "classes/Wizard.h"
 #include <vector>
 #include <string>
 #include <iostream>
+#include <functional>
 
 using namespace std;
 
 class Spell {
 public:
-    static vector<Spell *> spells;
+    static vector<Spell *> all_spells;
     string name;
-    void (*action)(Wizard& attacker, Wizard& defender);
+//    function<void(Wizard &, Wizard &)> action;
+    void (*action)(Wizard&, Wizard&);
+//    void (*action);
 
-    Spell& operator=(const Spell& s) {
-#ifdef DEBUG
-        cout << "NEW Spell" << " " << s.name << endl;
-#endif
-        this->name = s.name;
-        spells.push_back(this);
-        return *this;
-    };
-    void operator[](Spell s) {};
-    Spell operator,(Spell) {return *this;};
+    Spell& operator=(const Spell& s);
+    void operator[](Spell s);
+    Spell operator,(Spell);
 
     static void print() {
-        for (const Spell s : Spell::spells)
-            cout << s.name << endl;
+        for (const Spell* s : Spell::all_spells)
+            cout << s->name << endl;
     }
 };
