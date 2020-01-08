@@ -45,20 +45,24 @@ BEGIN_GAME
                 END
         END
     }
-            CREATE SPELLS [
-                SPELL {
+    CREATE SPELLS [
+            SPELL {
                     NAME: "spell2",
                     ACTION: START
                     END
-                },
-                SPELL {
-                NAME: "spell3",
+            },
+            SPELL {
+                    NAME: "spell3",
                     ACTION: START
                     END
-                }
+            }
     ]
     ;
+//    MRS "HermioneGranger" LEARN [
+//            SPELL_NAME(spell1)
+//            SPELL_NAME(spell2)
+//    ]
 //
 //DUEL
-
+Game::printall();
 END_GAME

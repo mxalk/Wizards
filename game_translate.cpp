@@ -53,6 +53,11 @@ void test() {
                 ; }
             ;}
     }
+    ;tmps = Spell {
+            .name = (false)?"": "spell2",
+            .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
+                      [](Wizard& attacker, Wizard& defender) -> void {}
+    }
     ;
 //DUEL
 

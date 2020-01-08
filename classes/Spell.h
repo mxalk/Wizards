@@ -15,7 +15,7 @@ using namespace std;
 class Wizard;
 class Spell {
 public:
-    static vector<Spell *> all_spells;
+    static vector<Spell> all_spells;
     string name;
     void (*action)(Wizard&, Wizard&);
 
@@ -23,8 +23,8 @@ public:
     void operator[](Spell s);
     Spell operator,(Spell);
 
-    static void print() {
-        for (const Spell* s : Spell::all_spells)
-            cout << s->name << endl;
+    static void print_spells() {
+        for (const Spell s : Spell::all_spells)
+            cout << s.name << endl;
     }
 };

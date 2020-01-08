@@ -4,7 +4,7 @@
 
 #include "Spell.h"
 
-vector<Spell *> Spell::all_spells;
+vector<Spell> Spell::all_spells;
 
 
 Spell& Spell::operator=(const Spell& s) {
@@ -13,7 +13,7 @@ Spell& Spell::operator=(const Spell& s) {
 #endif
     this->name = s.name;
     this->action = s.action;
-    all_spells.push_back(this);
+    all_spells.push_back(*this);
     return *this;
 };
 void Spell::operator[](Spell s) {};

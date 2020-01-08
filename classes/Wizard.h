@@ -14,7 +14,7 @@ using namespace std;
 class Spell;
 class Wizard {
 public:
-    static vector<Wizard *> all_wizards;
+    static vector<Wizard> all_wizards;
     vector<Spell *> spells;
     string name, house;
     int hp;
@@ -27,6 +27,6 @@ public:
     void print_wizard();
 
     static void print_wizards() {
-        for (Wizard* w : Wizard::all_wizards) w->print_wizard();
+        for (Wizard w : Wizard::all_wizards) w.print_wizard();
     }
 };

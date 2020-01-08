@@ -4,7 +4,7 @@
 
 #include "Wizard.h"
 
-vector<Wizard *> Wizard::all_wizards;
+vector<Wizard> Wizard::all_wizards;
 
 Wizard& Wizard::operator=(const Wizard& w) {
 #ifdef DEBUG
@@ -13,7 +13,7 @@ Wizard& Wizard::operator=(const Wizard& w) {
     this->name = w.name;
     this->house = w.house;
     this->hp = w.hp;
-    all_wizards.push_back(this);
+    all_wizards.push_back(*this);
     return *this;
 }
 

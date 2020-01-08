@@ -52,4 +52,10 @@ public:
     };
 
     static bool not_f(bool arg) { return !arg; };
+
+    static void printall() {
+        Wizard::print_wizards();
+        Spell::print_spells();
+    };
+
 };
