@@ -15,15 +15,17 @@ class Spell;
 class Wizard {
 public:
     static vector<Wizard> all_wizards;
-    vector<Spell *> spells;
+    vector<Spell> spells;
     string name, house;
     int hp;
     bool wand = true;
 
+    void operator-=(int);
+    void operator+=(int);
     Wizard& operator=(const Wizard&);
-    void operator[](Wizard w);
     Wizard operator,(Wizard);
-    Wizard& operator=(vector<Spell *> spells);
+    void operator[](Wizard);
+    void operator[](string);
 
     void print_wizard();
     void print_wizard_name();
@@ -41,4 +43,5 @@ public:
         for (Wizard w : Wizard::all_wizards) w.print_wizard_name();
     }
 
+    void teach_spell(Spell &spell);
 };

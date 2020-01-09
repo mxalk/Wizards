@@ -77,7 +77,7 @@
 
 // SPELL LEARNING
 
-#define MR ;Wizard::getWizard(
+#define MR ;SPELL_VECTOR Wizard::getWizard(
 #define MRS ;Wizard::getWizard(
-#define LEARN )= 
-#define SPELL_NAME(X) test(#X);
+#define LEARN )
+#define SPELL_NAME(X) #X" "

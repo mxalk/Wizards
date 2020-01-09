@@ -16,11 +16,5 @@ Spell& Spell::operator=(const Spell& s) {
     all_spells.push_back(*this);
     return *this;
 };
-void Spell::operator[](Spell s) {};
 Spell Spell::operator,(Spell) {return *this;}
-
-//Spell::Spell(string name, void (*action)(Wizard &, Wizard &)) {
-//    this->name = name;
-//    this->action = action;
-//    Spell::all_spells.push_back(this);
-//};
+void Spell::operator[](Spell s) {};

@@ -10,6 +10,7 @@ BEGIN_GAME
             HOUSE : "GryffinTOR",
             HP : 120
     }
+
     CREATE WIZARDS[
         WIZARD{
                 NAME : "HermioneGranger",
@@ -32,7 +33,7 @@ BEGIN_GAME
     CREATE SPELL {
         NAME: "spell1",
         ACTION: START
-               DAMAGE ATTACKER 25
+//               DAMAGE ATTACKER 25
 //                HEAL DEFENDER 20
 //                EQUIP DEFENDER _
 //                EQUIP ATTACKER ---α
@@ -60,10 +61,10 @@ BEGIN_GAME
                     END
             }
     ]
-//     MRS "HermioneGranger" LEARN [
-//             SPELL_NAME(spell1)
-//             SPELL_NAME(spell2)
-//         ]
+     MRS "HermioneGranger" LEARN [
+             SPELL_NAME(spell1)
+             SPELL_NAME(spell2)
+         ]
 //DUEL
 ;
 Game::printall();

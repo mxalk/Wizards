@@ -40,7 +40,7 @@ void test() {
             .name = (false)?"": "spell1",
                 .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
                         [](Wizard& attacker, Wizard& defender) -> void {
-               ; attacker.hp += 25
+               ; attacker += 25
 //                ;DAMAGE defender 20
 //                ;EQUIP defender _
 //                ;EQUIP attacker ---α
@@ -61,10 +61,17 @@ void test() {
                       ;}
     }
 
-//     ;Wizard::getWizard("HermioneGranger") = [
-//        SPELL_NAME(spell1)
-//        SPELL_NAME(spell2)
+//     ;Wizard::getWizard("HermioneGranger") [
+//        spells_learn.push_back(Spell::getSpell("spell1"));
+//        spells_learn.push_back(Spell::getSpell("spell2"));
 //    ]
+//    ; Wizard::getWizard("HermioneGranger") [
+//        Spell::getSpell("spell1") +
+//        Spell::getSpell("spell2") +
+//    ]
+    ; Wizard::getWizard("HermioneGranger") [
+        "spell1" " " "spell2"
+    ]
 //DUEL
 ;
 }
