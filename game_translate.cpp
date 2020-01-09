@@ -37,10 +37,10 @@ void test() {
     ]
 
     ; tmps = Spell {
-            .name = (false)?"": "test",
+            .name = (false)?"": "spell1",
                 .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
                         [](Wizard& attacker, Wizard& defender) -> void {
-//                ;HEAL attacker 25
+               ; attacker.hp += 25
 //                ;DAMAGE defender 20
 //                ;EQUIP defender _
 //                ;EQUIP attacker ---α
@@ -56,9 +56,15 @@ void test() {
     ;tmps = Spell {
             .name = (false)?"": "spell2",
             .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
-                      [](Wizard& attacker, Wizard& defender) -> void {}
+                      [](Wizard& attacker, Wizard& defender) -> void {
+                              SHOW "LALALAL"
+                      ;}
     }
-    ;
-//DUEL
 
+//     ;Wizard::getWizard("HermioneGranger") = [
+//        SPELL_NAME(spell1)
+//        SPELL_NAME(spell2)
+//    ]
+//DUEL
+;
 }

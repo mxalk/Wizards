@@ -32,7 +32,7 @@ BEGIN_GAME
     CREATE SPELL {
         NAME: "spell1",
         ACTION: START
-//                DAMAGE ATTACKER 25
+               DAMAGE ATTACKER 25
 //                HEAL DEFENDER 20
 //                EQUIP DEFENDER _
 //                EQUIP ATTACKER ---α
@@ -42,6 +42,7 @@ BEGIN_GAME
 //                    DAMAGE DEFENDER 20
                 ELSE
 //                    DAMAGE DEFENDER 30
+                SHOW "LALALLA1"
                 END
         END
     }
@@ -49,20 +50,22 @@ BEGIN_GAME
             SPELL {
                     NAME: "spell2",
                     ACTION: START
+                SHOW "LALALLA2"
                     END
             },
             SPELL {
                     NAME: "spell3",
                     ACTION: START
+                        SHOW "LALALLA3"
                     END
             }
     ]
-    ;
-//    MRS "HermioneGranger" LEARN [
-//            SPELL_NAME(spell1)
-//            SPELL_NAME(spell2)
-//    ]
-//
+//     MRS "HermioneGranger" LEARN [
+//             SPELL_NAME(spell1)
+//             SPELL_NAME(spell2)
+//         ]
 //DUEL
+;
 Game::printall();
+Spell::all_spells.at(1).action(Wizard::all_wizards.at(0), Wizard::all_wizards.at(1));
 END_GAME

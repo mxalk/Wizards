@@ -4,6 +4,7 @@ project(Wizards)
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
+include_directories(classes)
 
 add_executable(Wizards
         game.cpp

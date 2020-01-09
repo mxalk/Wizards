@@ -33,16 +33,32 @@
 #define END ;}
 //#define ---α true
 #define _ false
-#define ATTACKER attacker
-#define DEFENDER defender
-#define DAMAGE ;
-#define HEAL ;
+
+// #define OP (
+// #define CP )
+
+#define MACRO_REDUCE_HP(x, wizard) x + wizard
+#define MACRO_DAMAGE(x) MACRO_REDUCE_HP(x,
+#define MACRO_ATTACKER(wizard) wizard)
+
+#define WATTACKER attacker
+#define WDEFENDER defender
+
+#define ATTACKER WATTACKER)
+#define DEFENDER WDEFENDER)
+
+#define DAMAGE ;REDUCE_HP(
+#define REDUCE_HP(wizard) wizard -
+
+#define HEAL ;INCREASE_HP(
+#define INCREASE_HP(wizard) wizard +
+ 
 #define EQUIP ;
 
-#define GET_HP ;Game::get_hp
-#define GET_HOUSE ;Game::get_house
-#define GET_NAME ;Game::get_name
-#define HAS_WAND ;Game::has_wand
+#define GET_HP(wizard) ;Game::get_hp(wizard
+#define GET_HOUSE(wizard) ;Game::get_house(wizard
+#define GET_NAME(wizard) ;Game::get_name(wizard
+#define HAS_WAND(wizard) ;Game::has_wand(wizard
 
 #define AND Game::and_f
 #define OR Game::or_f
@@ -61,7 +77,7 @@
 
 // SPELL LEARNING
 
-#define MR
-#define MRS
-#define LEARN
-#define SPELL_NAME
+#define MR ;Wizard::getWizard(
+#define MRS ;Wizard::getWizard(
+#define LEARN )= 
+#define SPELL_NAME(X) test(#X);

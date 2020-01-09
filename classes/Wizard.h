@@ -20,13 +20,25 @@ public:
     int hp;
     bool wand = true;
 
-    Wizard& operator=(const Wizard& w);
+    Wizard& operator=(const Wizard&);
     void operator[](Wizard w);
     Wizard operator,(Wizard);
+    Wizard& operator=(vector<Spell *> spells);
 
     void print_wizard();
+    void print_wizard_name();
+    //void spell_select();
+
+    static Wizard& getWizard(string name) {
+        for (Wizard& w : Wizard::all_wizards) if (name == w.name) return w;
+    }
 
     static void print_wizards() {
         for (Wizard w : Wizard::all_wizards) w.print_wizard();
     }
+
+    static void print_wizards_names() {
+        for (Wizard w : Wizard::all_wizards) w.print_wizard_name();
+    }
+
 };

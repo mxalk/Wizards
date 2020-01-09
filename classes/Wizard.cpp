@@ -21,9 +21,22 @@ void Wizard::operator[](Wizard w) {}
 
 Wizard Wizard::operator,(Wizard) {return *this;}
 
+Wizard& Wizard::operator=(vector<Spell *> spells) {
+    for (Spell* s : spells) this->spells.push_back(s);
+    return *this;
+}
+
 void Wizard::print_wizard() {
     cout << this->name << " " << this->house << " " << this->hp << endl;
-    for (const Spell* s : Wizard::spells)
+    for (Spell* s : Wizard::spells)
         cout << s->name << " ";
     cout << endl;
 }
+
+void Wizard::print_wizard_name() {
+    cout << this->name << endl;
+}
+
+// void Wizard::spell_select() {
+
+// }
