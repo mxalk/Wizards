@@ -34,9 +34,42 @@ void Wizard::print_wizard() {
 }
 
 void Wizard::print_wizard_name() {
-    cout << this->name << endl;
+    cout << this->name;
 }
 
-// void Wizard::spell_select() {
+void Wizard::spell_select(int x) {
+    cout << this->name << "(Player" << x << ") select spell" << endl;
+    cout << "------------------" << endl;
+    for (Spell* s : Wizard::spells) {
+        cout << s->name << endl;
+    }
+    cout << "------------------" << endl;
+}
 
-// }
+void Wizard::print_status() {
+    cout << "##################" << endl
+         << "Name: " << this->name << endl
+         << "Hp: " << this->hp << endl;
+    if (this->wand) cout << "Wand Equipped";
+    else            cout << "Wand Unequipped";
+    cout << "##################" << endl << endl;
+}
+
+bool Wizard::hasWand() const {
+    return wand;
+}
+
+int Wizard::getHp() const {
+    return hp;
+}
+
+//vector<Spell> & Wizard::getSpell(string spell_name) {
+//    for (Spell s : Wizard::spells) {
+//        if (spell_name == s.name)
+//            return s;
+//    }
+//}
+
+}
+
+

@@ -16,4 +16,4 @@ add_executable(Wizards
         classes/Spell.cpp
         classes/Spell.h
         classes/Game.cpp
-        classes/Game.h)
+        classes/Game.h classes/Round.cpp classes/Round.h classes/Round1.cpp classes/Round1.h)
