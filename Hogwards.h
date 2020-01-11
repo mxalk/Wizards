@@ -29,7 +29,7 @@
 #define SPELL tmps = Spell
 #define SPELLS Spell {}
 #define ACTION .action = (false)?[](Wizard& attacker, Wizard& defender){}
-#define START [](Wizard& attacker, Wizard& defender) {
+#define START [](Wizard& attacker, Wizard& defender) { void (*new_action)(Wizard& attacker, Wizard& defender);
 #define END ;}
 //#define α "
 //#define _ "
@@ -53,10 +53,11 @@
 #define IF ;if (
 #define ELSE_IF ;} else if (
 #define ELSE ;} else {
-#define DO ) {
+#define DO ) new_action = [](Wizard& attacker, Wizard& defender) {
 
 #define FOR for (int i=0; i<
 #define ROUNDS ; i++
+#define AFTER ;
 
 #define SHOW cout<<
 

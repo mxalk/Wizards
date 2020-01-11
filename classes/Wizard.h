@@ -5,9 +5,11 @@
 
 #include "classes/global.h"
 #include "classes/Spell.h"
+#include "Action.h"
 #include <vector>
 #include <string>
 #include <iostream>
+#include <list>
 
 using namespace std;
 
@@ -17,6 +19,7 @@ class Wizard {
 public:
     static vector<Wizard> all_wizards;
     vector<Spell> spells;
+    list<vector<Action>> rounds;
     string name, house;
     House enum_house;
     int max_hp, hp;

@@ -17,11 +17,11 @@ public:
     string name;
     void (*action)(Wizard&, Wizard&);
 
-    Spell& operator=(const Spell& s);
-    Spell operator,(Spell);
+    Spell &operator=(const Spell& s);
+    Spell &operator,(const Spell&);
     void operator[](Spell s);
 
-    static Spell& getSpell(const string& name) {
+    static Spell &getSpell(const string& name) {
         for (Spell& s : Spell::all_spells) if (name == s.name) return s;
     }
     static void print_spells() {

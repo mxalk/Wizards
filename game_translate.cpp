@@ -35,6 +35,7 @@ void test() {
             .name = (false)?"": "spell1",
                 .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
                         [](Wizard& attacker, Wizard& defender) -> void {
+                void (*new_action)(Wizard& attacker, Wizard& defender);
 //               ; Action_Damage action; action.setAttacker(attacker); action.setDefender(attacker) 25
 //                ;DAMAGE defender 20
 //                ;EQUIP defender _
@@ -46,6 +47,9 @@ void test() {
                 ; } else {
 //                            DAMAGE DEFENDER 30
                 ; }
+                for (int i=0; i<5; i++) new_action = [](Wizard& attacker, Wizard& defender) {
+//                            DAMAGE DEFENDER 30
+                ;}
             ;}
     }
     ;tmps = Spell {

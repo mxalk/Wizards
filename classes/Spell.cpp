@@ -13,5 +13,5 @@ Spell& Spell::operator=(const Spell& s) {
     all_spells.push_back(*this);
     return *this;
 };
-Spell Spell::operator,(Spell) {return *this;}
+Spell &Spell::operator,(const Spell&) {return *this;}
 void Spell::operator[](Spell s) {};

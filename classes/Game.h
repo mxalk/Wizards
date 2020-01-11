@@ -65,6 +65,8 @@ public:
         Spell::print_spells();
     };
 
-//    static void duel()
+    static void duel() {
+
+    }
 
 };

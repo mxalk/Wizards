@@ -3,21 +3,17 @@
 //
 #pragma once
 
-#include "Wizard.h"
-
 class Action {
 public:
-    Wizard attacker;
-    Wizard defender;
 
-    virtual void apply() = 0;
+    virtual void apply() {};
 
-    void setAttacker(Wizard &w) {
-        this->attacker = w;
-    };
-    void setDefender(Wizard &w) {
-        this->defender = w;
-    };
+//    void setAttacker(Wizard &w) {
+//        this->attacker = w;
+//    };
+//    void setDefender(Wizard &w) {
+//        this->defender = w;
+//    };
 };
 
 //void Action::setAttacker(Wizard &w)
