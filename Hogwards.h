@@ -6,6 +6,7 @@
 #include "classes/Wizard.h"
 #include "classes/Spell.h"
 #include "classes/Game.h"
+#include "classes/Action_Damage.h"
 #include <iostream>
 
 #define BEGIN_GAME int main() {Wizard tmpw; Spell tmps;
@@ -30,34 +31,20 @@
 #define ACTION .action = (false)?[](Wizard& attacker, Wizard& defender){}
 #define START [](Wizard& attacker, Wizard& defender) {
 #define END ;}
-//#define ---α true
-#define _ false
+//#define α "
+//#define _ "
 
-// #define OP (
-// #define CP )
+#define ATTACKER attacker
+#define DEFENDER defender
 
-#define MACRO_REDUCE_HP(x, wizard) x + wizard
-#define MACRO_DAMAGE(x) MACRO_REDUCE_HP(x,
-#define MACRO_ATTACKER(wizard) wizard)
-
-#define WATTACKER attacker
-#define WDEFENDER defender
-
-#define ATTACKER WATTACKER)
-#define DEFENDER WDEFENDER)
-
-#define DAMAGE ;REDUCE_HP(
-#define REDUCE_HP(wizard) wizard -
-
-#define HEAL ;INCREASE_HP(
-#define INCREASE_HP(wizard) wizard +
- 
+#define DAMAGE ;
+#define HEAL ;
 #define EQUIP ;
 
-#define GET_HP(wizard) ;Game::get_hp(wizard
-#define GET_HOUSE(wizard) ;Game::get_house(wizard
-#define GET_NAME(wizard) ;Game::get_name(wizard
-#define HAS_WAND(wizard) ;Game::has_wand(wizard
+#define GET_HP(wizard) wizard.hp
+#define GET_HOUSE(wizard) Game::get_house(wizard)
+#define GET_NAME(wizard) Game::get_name(wizard)
+#define HAS_WAND(wizard) Game::has_wand(wizard)
 
 #define AND Game::and_f
 #define OR Game::or_f

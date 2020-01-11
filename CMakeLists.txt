@@ -12,8 +12,7 @@ add_executable(Wizards
         Hogwards.h
         classes/Wizard.cpp
         classes/Wizard.h
-        classes/debug.h
         classes/Spell.cpp
         classes/Spell.h
         classes/Game.cpp
-        classes/Game.h)
+        classes/Game.h classes/Action.h classes/Action_Damage.h classes/global.h classes/global.cpp)
