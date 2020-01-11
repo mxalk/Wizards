@@ -6,8 +6,8 @@
 BEGIN_GAME
 
     CREATE WIZARD{
-            NAME : "Harry Pointer",
-            HOUSE : "GryffinTOR",
+            NAME : "Harry Potter",
+            HOUSE : "Gryffindor",
             HP : 120
     }
 
@@ -26,7 +26,7 @@ BEGIN_GAME
 
     CREATE WIZARD {
         NAME: "Darko Malfoy",
-        HOUSE: "Slythernet",
+        HOUSE: "Slytherin",
         HP: 100
     }
 

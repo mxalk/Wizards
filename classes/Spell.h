@@ -3,12 +3,10 @@
 //
 #pragma once
 
-#include "classes/debug.h"
 #include "classes/Wizard.h"
 #include <vector>
 #include <string>
 #include <iostream>
-#include <functional>
 
 using namespace std;
 

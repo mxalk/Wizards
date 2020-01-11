@@ -3,7 +3,6 @@
 //
 #pragma once
 
-#include "classes/debug.h"
 #include "classes/Wizard.h"
 #include "classes/Spell.h"
 #include "classes/Game.h"
@@ -77,7 +76,7 @@
 
 // SPELL LEARNING
 
-#define MR ;SPELL_VECTOR Wizard::getWizard(
+#define MR ;Wizard::getWizard(
 #define MRS ;Wizard::getWizard(
 #define LEARN )
 #define SPELL_NAME(X) #X" "

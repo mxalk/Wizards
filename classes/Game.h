@@ -4,14 +4,21 @@
 #pragma once
 
 #include "classes/Wizard.h"
+#include "classes/Spell.h"
+#include <string>
 #include <cstdarg>
 
+using namespace std;
+
+class Wizard;
+class Spell;
 class Game {
 public:
-    static int get_hp(Wizard w) { return w.hp; };
-    static string get_house(Wizard w) { return w.house; }
-    static string get_name(Wizard w) { return w.name; }
-    static bool has_wand(Wizard w) { return w.wand; }
+
+//    static int get_hp(Wizard &w) { return w.hp; };
+//    static string get_house(Wizard &w) { return w.house; }
+//    static string get_name(Wizard &w) { return w.name; }
+//    static bool has_wand(Wizard &w) { return w.wand; }
 
     /*
      * an sinexizei na prospa8ei na diavazei arguments
@@ -57,5 +64,7 @@ public:
         Wizard::print_wizards();
         Spell::print_spells();
     };
+
+//    static void duel()
 
 };

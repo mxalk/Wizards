@@ -8,9 +8,6 @@ vector<Spell> Spell::all_spells;
 
 
 Spell& Spell::operator=(const Spell& s) {
-#ifdef DEBUG
-    cout << "NEW Spell" << " " << s.name << endl;
-#endif
     this->name = s.name;
     this->action = s.action;
     all_spells.push_back(*this);
