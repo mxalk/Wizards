@@ -71,64 +71,6 @@ Game::printall();
 Spell::all_spells.at(1).action(Wizard::all_wizards.at(0), Wizard::all_wizards.at(1));
 END_GAME
 
-/*
-void duel() {
 
-        std::string str1;
-        std::string str2;
 
-        cout << "-------------------------HARRY POTTER THE GAME------------------------" << endl << endl;
-        cout << "Player1 select wizard:" << endl
-             << "------------------" << endl;
-        Wizard::print_wizards_names();
-        cout << "------------------" << endl;
-        getline (std::cin, str1);
 
-        cout << "Player2 select wizard:" << endl
-             << "------------------" << endl;
-        Wizard::print_wizards_names();
-        cout << "------------------" << endl;
-        getline (std::cin, str2);
-
-        Wizard w1 = Wizard::getWizard(str1);
-        
-        if (str1.compare(str2) != 0) { 
-                Wizard w2 = Wizard::getWizard(str2);
-        } else {
-                // need a copy of wizard 1
-        } 
-
-        Round round;
-        while ( w1.getHp() > 0 && w2.getHp() > 0) {
-                round.print_round();
-
-                if (w1.hasWand()) {
-                        Spell sp1;      string s1;
-                        w1.spell_select(1);
-                        getline (std::cin, s1);
-                        //sp1 = Wizard::getSpell(s1);   implement getSpell
-                        w1.print_status();
-                        w2.print_status();
-                } else {
-                        w1.print_wizard_name();
-                        cout << "(Player1) has no wand equipped, can't cast spell." << endl;
-                }
-
-                if(w2.hasWand()) {
-                        Spell sp2;      string s2;
-                        w2.spell_select(2);
-                        getline (std::cin, s2);
-                        //sp2 = Wizard::getSpell(s2);
-                        w1.print_status();
-                        w2.print_status();
-                } else {
-                        w2.print_wizard_name();
-                        cout << "(Player2) has no wand equipped, can't cast spell." << endl;
-                }
-
-                // round++ na kano overload to increment
-        }
-
-} 
-
-*/

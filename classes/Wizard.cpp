@@ -44,6 +44,7 @@ void Wizard::print_wizard() {
 void Wizard::print_wizard_name() {
     cout << this->name;
 }
+
 void Wizard::operator[](const string& str) {
     stringstream ss(str);
     istream_iterator<string> begin(ss);
@@ -51,14 +52,16 @@ void Wizard::operator[](const string& str) {
     vector<string> vstrings(begin, end);
     for (const string& spell_name : vstrings) this->spells.push_back(Spell::getSpell(spell_name));
 }
+
 void Wizard::spell_select(int x) {
     cout << this->name << "(Player" << x << ") select spell" << endl;
     cout << "------------------" << endl;
-    for (Spell* s : Wizard::spells) {
-        cout << s->name << endl;
+    for (Spell s : Wizard::spells) {
+        cout << s.name << endl;
     }
     cout << "------------------" << endl;
 }
+
 void Wizard::damage(Wizard &target, int amount) {
     target.hp -= amount * Wizard::house_modifier(this->enum_house, target.enum_house);
     if (target.hp < 0) target.hp = 0;
@@ -80,7 +83,6 @@ void Wizard::init(const Wizard &w) {
     this->hp = w.hp;
     this->max_hp = w.hp;
     this->wand = true;
-
 }
 
 void Wizard::print_status() {
