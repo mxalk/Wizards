@@ -13,7 +13,7 @@
 #define BEGIN_GAME int main() {Wizard tmpw; Spell tmps;
 #define END_GAME return 0;}
 #define CREATE ;
-#define DUEL duel();
+#define DUEL ; Game::duel();
 
 
 // WIZARDS
@@ -29,12 +29,10 @@
 
 #define SPELL tmps = Spell
 #define SPELLS Spell {}
-#define ACTION .action = (false)?[](Wizard& attacker, Wizard& defender){}
-#define START [](Wizard& attacker, Wizard& defender) {\
-    stack <int> depth;\
-    depth.push(0);\
+#define ACTION .action = (false)?[](Wizard *attacker, Wizard *defender){}
+#define START [](Wizard *attacker, Wizard *defender) {\
     int round_offset = 0;
-#define END ;round_offset = depth.top(); depth.pop(); }
+#define END ; }
 //#define α "
 //#define _ "
 
@@ -45,25 +43,26 @@
 #define HEAL ;
 #define EQUIP ;
 
-#define GET_HP(wizard) wizard.hp
-#define GET_HOUSE(wizard) wizard.house
-#define GET_NAME(wizard) wizard.name
-#define HAS_WAND(wizard) wizard.wand
+#define GET_HP(wizard) wizard->hp
+#define GET_HOUSE(wizard) wizard->house
+#define GET_NAME(wizard) wizard->name
+#define HAS_WAND(wizard) wizard->wand
 
 #define AND Game::and_f
 #define OR Game::or_f
 #define NOT Game::not_f
 
-#define IF ;depth.push(round_offset); if (
-#define ELSE_IF ;round_offset = depth.top(); depth.pop(); }; else if (
-#define ELSE ;round_offset = depth.top(); depth.pop(); }; else {
-#define DO ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
+#define IF ; if (
+#define ELSE_IF ;}; else if (
+#define ELSE ;}; else {
+#define DO ) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) { \
+    int round_offset = 0;
 
-#define FOR ;depth.push(round_offset); for (round_offset=0; round_offset<
+#define FOR ;for (round_offset=0; round_offset<
 #define ROUNDS ; round_offset++
-#define AFTER ;depth.push(round_offset); if (round_offset=
+#define AFTER ;if (round_offset=
 
-#define SHOW cout<<
+#define SHOW ;cout<<
 
 
 // SPELL LEARNING

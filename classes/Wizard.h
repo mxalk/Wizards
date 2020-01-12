@@ -24,36 +24,36 @@ public:
 
 //    void operator-=(int);
 //    void operator+=(int);
-    Wizard& operator=(const Wizard&);
+    Wizard &operator=(const Wizard &w);
     Wizard operator,(Wizard);
     void operator[](Wizard);
     void operator[](const string&);
 
-    void init(const Wizard &w);
-    void damage(Wizard &, int);
-    void heal(Wizard &, int);
-    void equip(Wizard &target, bool wand);
+    Wizard *choose();
+    void damage(Wizard *, int);
+    void heal(Wizard *, int);
+    void equip(Wizard *target, bool wand);
 
     int getHp() const;
     bool hasWand() const;
 
-    void print_wizard();
+    void print_wizard() const;
     void print_wizard_name();
     void spell_select(int x);
     void print_status();
 
     static Wizard& getWizard(const string& name) {
-        for (Wizard& w : Wizard::all_wizards) if (name == w.name) return w;
+        for (Wizard& w : Wizard::all_wizards) {
+            if (name == w.name) return w;
+        }
         throw exception();
     }
 
     static void print_wizards() {
-        for (Wizard w : Wizard::all_wizards) w.print_wizard();
-    }
-
-    static void print_wizards_names() {
+        int i = 1;
         for (Wizard w : Wizard::all_wizards) {
-            w.print_wizard_name();
+            cout << i++ << ". ";
+            w.print_wizard();
             cout << endl;
         }
     }
@@ -99,7 +99,4 @@ public:
         if (house == "Ravenclaw") return Ravenclaw;
         throw exception();
     }
-
-//    vector<Spell> & getSpell(string spell_name) ;
-
 };

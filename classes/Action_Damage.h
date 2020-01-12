@@ -8,10 +8,10 @@
 class Action_Damage: public Action {
 public:
     int amount{0};
-    Wizard attacker;
-    Wizard defender;
+    Wizard *attacker;
+    Wizard *defender;
 
     void apply() override {
-        attacker.damage(this->defender, this->amount);
+        attacker->damage(this->defender, this->amount);
     }
 };

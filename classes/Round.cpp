@@ -12,21 +12,24 @@ void Round::print_round() {
     TILDES;
 }
 
-Round &Round::operator=(void (*action)(Wizard &, Wizard &, int &round_offset, stack<int> &depth)) {
-    this->actions.emplace_back(action);
+Round &Round::operator=(void (*action)(Wizard *, Wizard *)) {
+    if (this->last_action == nullptr) new exception();
+    this->last_action->action=action;
     return *this;
 }
 
-void Round::play(Wizard &attacker, Wizard &defender) {
-    stack <int> depth;
-    depth.push(0);
-    int round_offset = 0;
+void Round::play(Wizard *player) {
+    for (Action_Block *ab: this->actions) {
+        if (ab->defender != player) continue;
+        ab->play();
+        free(ab);
+    }
+}
 
-    for (Action_Block &ab: this->actions)
-        ab.play(attacker, defender, round_offset, depth);
-//    CHOOSE SPELL
-    for (Action_Block &ab: this->actions)
-        ab.play(attacker, defender, round_offset, depth);
+Round &Round::addAction(Wizard *attacker, Wizard *defender) {
+    Action_Block *ab = new Action_Block{attacker, defender};
+    this->last_action = ab;
+    this->actions.push_back(ab);
 }
 
 

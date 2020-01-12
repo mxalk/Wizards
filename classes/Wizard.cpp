@@ -5,11 +5,17 @@
 #include <sstream>
 #include <iterator>
 #include "Wizard.h"
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
 
 vector<Wizard> Wizard::all_wizards;
 
-Wizard& Wizard::operator=(const Wizard& w) {
-    this->init(w);
+Wizard &Wizard::operator=(const Wizard &w) {
+    this->name = w.name;
+    this->house = w.house;
+    this->hp = w.hp;
     all_wizards.push_back(*this);
     return *this;
 }
@@ -31,14 +37,13 @@ void Wizard::operator[](Wizard) {}
 //    return *this;
 //}
 
-void Wizard::print_wizard() {
-    cout << this->name << " " << this->house << " " << this->hp << endl;
-    cout << "Spells: ";
+void Wizard::print_wizard() const {
+    cout << left << setw(25) <<this->name << setw(12) << this->house << setw(5) << right << this->hp;
+    cout << "\tSpells: ";
     if (Wizard::spells.empty()) {
         cout << "None";
     } else for (Spell s : Wizard::spells)
-        cout << "'" << s.name << "'" << " ";
-    cout << endl;
+            cout << "'" << s.name << "'" << " ";
 }
 
 void Wizard::print_wizard_name() {
@@ -62,27 +67,26 @@ void Wizard::spell_select(int x) {
     cout << "------------------" << endl;
 }
 
-void Wizard::damage(Wizard &target, int amount) {
-    target.hp -= amount * Wizard::house_modifier(this->enum_house, target.enum_house);
-    if (target.hp < 0) target.hp = 0;
+void Wizard::damage(Wizard *target, int amount) {
+    target->hp -= amount * Wizard::house_modifier(this->enum_house, target->enum_house);
+    if (target->hp < 0) target->hp = 0;
 }
 
-void Wizard::heal(Wizard &target, int amount) {
-    target.hp += amount;
-    if (target.hp > target.max_hp) target.hp = target.max_hp;
+void Wizard::heal(Wizard *target, int amount) {
+    target->hp += amount;
+    if (target->hp > target->max_hp) target->hp = target->max_hp;
 }
 
-void Wizard::equip(Wizard &target, bool wand) {
-    target.wand = wand;
+void Wizard::equip(Wizard *target, bool wand) {
+    target->wand = wand;
 }
 
-void Wizard::init(const Wizard &w) {
-    this->name = w.name;
-    this->house = w.house;
-    this->enum_house = Wizard::map(this->house);
-    this->hp = w.hp;
-    this->max_hp = w.hp;
-    this->wand = true;
+Wizard * Wizard::choose() {
+    Wizard *w = new Wizard(*this);
+    w->enum_house = Wizard::map(w->house);
+    w->max_hp = w->hp;
+    w->wand = true;
+    return w;
 }
 
 void Wizard::print_status() {

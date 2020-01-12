@@ -16,7 +16,7 @@ class Spell {
 public:
     static vector<Spell> all_spells;
     string name;
-    void (*action)(Wizard&, Wizard&);
+    void (*action)(Wizard *, Wizard *);
 //    Action_Block action;
 
     Spell &operator=(const Spell& s);

@@ -9,6 +9,8 @@
 #include <list>
 #include <string>
 #include <cstdarg>
+#include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -103,62 +105,72 @@ public:
         Spell::print_spells();
     };
 
+    static bool choose_ok(int choice, int max) {
+        return (choice < 1 || choice > max);
+    }
+    static bool choose_ok(int choice, int min, int max) {
+        return (choice < min || choice > max);
+    }
+
     static void duel() {
+        int p, wizards_size_choose = Wizard::all_wizards.size(), players, tmp;
+        bool invalid_choice;
 
-        std::string str1;
-        std::string str2;
+        cout << "-----------------------------------  HARRY POTTER THE GAME  -----------------------------------" << endl << endl;
 
-        cout << "-------------------------HARRY POTTER THE GAME------------------------" << endl << endl;
-        cout << "Player1 select wizard:" << endl
-             << "------------------" << endl;
-        Wizard::print_wizards_names();
-        cout << "------------------" << endl;
-        getline (std::cin, str1);
+        do {
+            cout << "Enter # of Players[2-6]:" << endl;
+            cin >> players;
+            invalid_choice = choose_ok(players, 2, 6);
+            if (invalid_choice) cout << endl << R"(!INVALID CHOICE!!)" << endl;
+        } while (invalid_choice);
 
-        cout << "Player2 select wizard:" << endl
-             << "------------------" << endl;
-        Wizard::print_wizards_names();
-        cout << "------------------" << endl;
-        getline (std::cin, str2);
+        Wizard *wizards[players];
 
-        Wizard w1 = Wizard::getWizard(str1);
-        Wizard w2;
-
-        if (str1 == str2) {
-            // need a copy of wizard 1
-        } else {
-            w2 = Wizard::getWizard(str2);
+        for (tmp = 0; tmp<players; tmp++) {
+            do {
+                cout << "Player "<< tmp+1 << " selects wizard:" << endl
+                     << "------------------" << endl;
+                Wizard::print_wizards();
+                cout << "------------------" << endl;
+                cout << "Choose [1-" << wizards_size_choose << "]:";
+                cin >> p;
+                invalid_choice = choose_ok(p, wizards_size_choose);
+                if (invalid_choice) cout << endl << R"(!INVALID CHOICE!!)" << endl;
+            } while (invalid_choice);
+            wizards[tmp] = Wizard::all_wizards.at(p-1).choose();
+            cout << "Player "<< tmp+1 << " selected wizard: " << wizards[tmp]->name <<endl;
+            cout << endl;
         }
 
-        Round round;
-        while ( w1.getHp() > 0 && w2.getHp() > 0) {
-            round.print_round();
-
-            if (w1.hasWand()) {
-                Spell sp1;      string s1;
-                w1.spell_select(1);
-                getline (std::cin, s1);
-                //sp1 = Wizard::getSpell(s1);   implement getSpell, lookup sto vector_spell tou wiz
-                w1.print_status();
-                w2.print_status();
-            } else {
-                w1.print_wizard_name();
-                cout << "(Player1) has no wand equipped, can't cast spell." << endl;
-            }
-
-            if(w2.hasWand()) {
-                Spell sp2;      string s2;
-                w2.spell_select(2);
-                getline (std::cin, s2);
-                //sp2 = Wizard::getSpell(s2);
-                w1.print_status();
-                w2.print_status();
-            } else {
-                w2.print_wizard_name();
-                cout << "(Player2) has no wand equipped, can't cast spell." << endl;
-            }
-
-            // round++ na kano overload to increment
-        }
+//        while ( w1->getHp() > 0 && w2->getHp() > 0) {
+//            round.print_round();
+//
+//            if (w1->hasWand()) {
+//                Spell sp1;      string s1;
+//                w1.spell_select(1);
+//                getline (std::cin, s1);
+//                //sp1 = Wizard::getSpell(s1);   implement getSpell, lookup sto vector_spell tou wiz
+//                w1.print_status();
+//                w2.print_status();
+//            } else {
+//                w1.print_wizard_name();
+//                cout << "(Player1) has no wand equipped, can't cast spell." << endl;
+//            }
+//
+//            if(w2.hasWand()) {
+//                Spell sp2;      string s2;
+//                w2.spell_select(2);
+//                getline (std::cin, s2);
+//                //sp2 = Wizard::getSpell(s2);
+//                w1.print_status();
+//                w2.print_status();
+//            } else {
+//                w2.print_wizard_name();
+//                cout << "(Player2) has no wand equipped, can't cast spell." << endl;
+//            }
+//
+//            // round++ na kano overload to increment
+//        }
     }
 };

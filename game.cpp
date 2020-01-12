@@ -13,12 +13,12 @@ BEGIN_GAME
 
     CREATE WIZARDS[
         WIZARD{
-                NAME : "HermioneGranger",
+                NAME : "Hermione Granger",
                 HOUSE : "Gryffindor",
                 HP : 120
         },
         WIZARD{
-                NAME : "LunaLovegood",
+                NAME : "Luna Lovegood",
                 HOUSE : "Ravenclaw",
                 HP : 85
         }
@@ -29,7 +29,6 @@ BEGIN_GAME
         HOUSE: "Slytherin",
         HP: 100
     }
-
     CREATE SPELL {
         NAME: "spell1",
         ACTION: START
@@ -52,7 +51,7 @@ BEGIN_GAME
                     END
                 END
                 AFTER 2 ROUNDS DO
-                    attacker.damage(defender, 25);
+                    attacker->damage(defender, 25);
                 END
         END
     }
@@ -70,14 +69,13 @@ BEGIN_GAME
                     END
             }
     ]
-     MRS "HermioneGranger" LEARN [
+
+     MRS "Hermione Granger" LEARN [
              SPELL_NAME(spell1)
              SPELL_NAME(spell2)
          ]
-//DUEL
-;
-Game::printall();
-Spell::all_spells.at(1).action(Wizard::all_wizards.at(0), Wizard::all_wizards.at(1));
+
+DUEL
 END_GAME
 
 

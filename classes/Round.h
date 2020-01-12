@@ -15,9 +15,12 @@ using namespace std;
 
 class Round {
 public:
-    vector<Action_Block> actions;
-    Round &operator=(void (*)(Wizard&, Wizard&, int &round_offset, stack<int> &depth));
-    void play(Wizard &attacker, Wizard &defender);
+    vector<Action_Block *> actions;
+    Action_Block *last_action;
+
+    Round &operator=(void (*)(Wizard *, Wizard *));
+    Round &addAction(Wizard *attacker, Wizard *defender);
+    void play(Wizard *player);
     void print_round();
 
 };
