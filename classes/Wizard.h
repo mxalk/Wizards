@@ -35,7 +35,7 @@ public:
     void init(const Wizard &w);
     void damage(Wizard &, int);
     void heal(Wizard &, int);
-    void equip(Wizard &defender, bool wand);
+    void equip(Wizard &target, bool wand);
 
     void print_wizard();
     void print_wizard_name();
@@ -61,7 +61,7 @@ public:
                 break;
             case Slytherin:
                 modifier += 0.15;
-                if (defender_house == Gryffindor) modifier -= 0.05;
+                if (defender_house == Gryffindor) modifier += 0.05;
                 break;
             case Hufflepuff:
                 modifier += 0.07;
@@ -73,7 +73,7 @@ public:
 
         switch(defender_house) {
             case Gryffindor:
-                modifier -=0.2;
+                modifier -= 0.2;
                 if (attacker_house == Slytherin) modifier -= 0.1;
                 break;
             case Slytherin:

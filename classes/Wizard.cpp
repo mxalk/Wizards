@@ -53,18 +53,18 @@ void Wizard::operator[](const string& str) {
     for (const string& spell_name : vstrings) this->spells.push_back(Spell::getSpell(spell_name));
 }
 
-void Wizard::damage(Wizard &defender, int amount) {
-    defender.hp -= amount * Wizard::house_modifier(this->enum_house, defender.enum_house);
-    if (defender.hp < 0) defender.hp = 0;
+void Wizard::damage(Wizard &target, int amount) {
+    target.hp -= amount * Wizard::house_modifier(this->enum_house, target.enum_house);
+    if (target.hp < 0) target.hp = 0;
 }
 
-void Wizard::heal(Wizard &defender, int amount) {
-    defender.hp -= amount * Wizard::house_modifier(this->enum_house, defender.enum_house);
-    if (defender.hp > defender.max_hp) defender.hp = defender.max_hp;
+void Wizard::heal(Wizard &target, int amount) {
+    target.hp += amount;
+    if (target.hp > target.max_hp) target.hp = target.max_hp;
 }
 
-void Wizard::equip(Wizard &defender, bool wand) {
-    defender.wand = wand;
+void Wizard::equip(Wizard &target, bool wand) {
+    target.wand = wand;
 }
 
 void Wizard::init(const Wizard &w) {
