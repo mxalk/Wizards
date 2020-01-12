@@ -39,6 +39,8 @@ public:
 
     void print_wizard();
     void print_wizard_name();
+    void spell_select(int x);
+    void print_status();
 
     static Wizard& getWizard(const string& name) {
         for (Wizard& w : Wizard::all_wizards) if (name == w.name) return w;
@@ -50,7 +52,10 @@ public:
     }
 
     static void print_wizards_names() {
-        for (Wizard w : Wizard::all_wizards) w.print_wizard_name();
+        for (Wizard w : Wizard::all_wizards) {
+            w.print_wizard_name();
+            cout << endl;
+        }
     }
 
     static float house_modifier(House attacker_house, House defender_house) {
@@ -94,4 +99,10 @@ public:
         if (house == "Ravenclaw") return Ravenclaw;
         throw exception();
     }
+    bool hasWand() const;
+
+    int getHp() const;
+
+//    vector<Spell> & getSpell(string spell_name) ;
+
 };
