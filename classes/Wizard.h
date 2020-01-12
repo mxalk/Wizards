@@ -5,11 +5,9 @@
 
 #include "classes/global.h"
 #include "classes/Spell.h"
-#include "Action.h"
 #include <vector>
 #include <string>
 #include <iostream>
-#include <list>
 
 using namespace std;
 
@@ -19,7 +17,6 @@ class Wizard {
 public:
     static vector<Wizard> all_wizards;
     vector<Spell> spells;
-    list<vector<Action>> rounds;
     string name, house;
     House enum_house;
     int max_hp, hp;
@@ -36,6 +33,9 @@ public:
     void damage(Wizard &, int);
     void heal(Wizard &, int);
     void equip(Wizard &target, bool wand);
+
+    int getHp() const;
+    bool hasWand() const;
 
     void print_wizard();
     void print_wizard_name();
@@ -99,9 +99,6 @@ public:
         if (house == "Ravenclaw") return Ravenclaw;
         throw exception();
     }
-    bool hasWand() const;
-
-    int getHp() const;
 
 //    vector<Spell> & getSpell(string spell_name) ;
 

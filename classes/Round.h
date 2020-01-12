@@ -1,18 +1,30 @@
 //
 // Created by antap on 1/9/2020.
 //
+#pragma once
 
 #include <iostream>
+#include <vector>
+#include "Wizard.h"
 
 #define TILDES std::cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl
 
+using namespace std;
+
 class Round {
 public:
-    int general;
-    int player1;
-    int player2;
+    vector<void (*)(Wizard& attacker, Wizard& defender)> actions;
+    Round& operator=(void (*)(Wizard& attacker, Wizard& defender));
+    void play();
 
-    Round();
+
+
+    void test() {
+        Round r;
+        r = [](Wizard& attacker, Wizard& defender) {
+            cout << "LALALA";
+        };
+    }
 
     void print_round();
 };

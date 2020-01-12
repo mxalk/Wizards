@@ -5,6 +5,8 @@
 
 #include "classes/Wizard.h"
 #include "classes/Spell.h"
+#include "Round.h"
+#include <list>
 #include <string>
 #include <cstdarg>
 
@@ -14,6 +16,13 @@ class Wizard;
 class Spell;
 class Game {
 public:
+    list<Round,Round> rounds;
+
+    static Round getRound(int);
+
+
+
+
 
 //    static int get_hp(Wizard &w) { return w.hp; };
 //    static string get_house(Wizard &w) { return w.house; }

@@ -29,8 +29,11 @@
 #define SPELL tmps = Spell
 #define SPELLS Spell {}
 #define ACTION .action = (false)?[](Wizard& attacker, Wizard& defender){}
-#define START [](Wizard& attacker, Wizard& defender) { void (*new_action)(Wizard& attacker, Wizard& defender);
-#define END ;}
+#define START [](Wizard& attacker, Wizard& defender) {\
+    stack <int> depth;\
+    depth.push(0);\
+    int round_offset = 0;
+#define END ;}; round_offset = depth.top(); depth.pop();
 //#define α "
 //#define _ "
 
@@ -50,14 +53,14 @@
 #define OR Game::or_f
 #define NOT Game::not_f
 
-#define IF ;if (
-#define ELSE_IF ;} else if (
-#define ELSE ;} else {
-#define DO ) new_action = [](Wizard& attacker, Wizard& defender) {
+#define IF ; depth.push(round_offset); if (
+#define ELSE_IF ;}; else if (
+#define ELSE ;}; else {
+#define DO ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender) {
 
-#define FOR for (int i=0; i<
-#define ROUNDS ; i++
-#define AFTER ;
+#define FOR ; depth.push(round_offset); for (round_offset=0; round_offset<
+#define ROUNDS ; round_offset++
+#define AFTER ; depth.push(round_offset); round_offset=
 
 #define SHOW cout<<
 
