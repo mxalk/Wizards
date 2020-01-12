@@ -37,27 +37,36 @@ void test() {
                 .action = (false)?[](Wizard& attacker, Wizard& defender) {}:
                         [](Wizard& attacker, Wizard& defender) -> void {
                 stack <int> depth;
-                depth.push(0);\
+                depth.push(0);
                 int round_offset = 0;
 //               ; Action_Damage action; action.setAttacker(attacker); action.setDefender(attacker) 25
 //                ;DAMAGE defender 20
 //                ;EQUIP defender _
 //                ;EQUIP attacker ---α
-                ; depth.push(round_offset); if ( defender.hp <= 20 ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender) {
+                ;if ( defender.hp <= 20 ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
 //                            DAMAGE DEFENDER 10
                             attacker.damage(defender, 10);
-                ;}; else if ( defender.hp <= 50 ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender) {
+                ;round_offset = depth.top(); depth.pop();}; else if ( defender.hp <= 50 ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
 //                            DAMAGE DEFENDER 20
                                 attacker.damage(defender, 20);
-                ;}; else Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender) {
+                ;round_offset = depth.top(); depth.pop();}; else Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
 //                            DAMAGE DEFENDER 30
                                 attacker.damage(defender, 30);
-                ;}; round_offset = depth.top(); depth.pop();
-                ; depth.push(round_offset); for (round_offset=0; round_offset<5; round_offset++) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender) {
+                ;round_offset = depth.top(); depth.pop();}
+                ;for (round_offset=0; round_offset<5; round_offset++) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
 //                            DAMAGE DEFENDER 30
-                                attacker.damage(defender, 30);
-                ;}; round_offset = depth.top(); depth.pop();
-            ;}
+                                attacker.damage(defender, 30)
+                                ;if ( defender.hp <= 20 ) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
+//                                    DAMAGE DEFENDER 10
+                                    attacker.damage(defender, 10);
+                                ;}
+                ;round_offset = depth.top(); depth.pop();}
+
+                ;depth.push(round_offset); if (round_offset = 0; round_offset++) Game::getRound(round_offset) = [](Wizard& attacker, Wizard& defender, int &round_offset, stack<int> &depth) {
+
+                ;round_offset = depth.top(); depth.pop();}
+
+            ;round_offset = depth.top(); depth.pop();}
     }
     ;tmps = Spell {
             .name = (false)?"": "spell2",

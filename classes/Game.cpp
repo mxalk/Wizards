@@ -3,3 +3,5 @@
 //
 
 #include "Game.h"
+
+list<Round> Game::rounds;

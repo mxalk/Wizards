@@ -25,7 +25,7 @@ BEGIN_GAME
     ]
 
     CREATE WIZARD {
-        NAME: "Darko Malfoy",
+        NAME: "Draco Malfoy",
         HOUSE: "Slytherin",
         HP: 100
     }
@@ -43,7 +43,16 @@ BEGIN_GAME
 //                    DAMAGE DEFENDER 20
                 ELSE
 //                    DAMAGE DEFENDER 30
-                SHOW "LALALLA1"
+                    SHOW "LALALLA1"
+                END
+
+                FOR 5 ROUNDS DO
+                    IF GET_HP(ATTACKER) > 20 DO
+                        SHOW round_offset
+                    END
+                END
+                AFTER 2 ROUNDS DO
+                    attacker.damage(defender, 25);
                 END
         END
     }

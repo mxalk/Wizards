@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 #include "Wizard.h"
+#include "Action_Block.h"
+#include <stack>
 
 #define TILDES std::cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl
 
@@ -13,18 +15,9 @@ using namespace std;
 
 class Round {
 public:
-    vector<void (*)(Wizard& attacker, Wizard& defender)> actions;
-    Round& operator=(void (*)(Wizard& attacker, Wizard& defender));
-    void play();
-
-
-
-    void test() {
-        Round r;
-        r = [](Wizard& attacker, Wizard& defender) {
-            cout << "LALALA";
-        };
-    }
-
+    vector<Action_Block> actions;
+    Round &operator=(void (*)(Wizard&, Wizard&, int &round_offset, stack<int> &depth));
+    void play(Wizard &attacker, Wizard &defender);
     void print_round();
+
 };

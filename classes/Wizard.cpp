@@ -109,6 +109,4 @@ int Wizard::getHp() const {
 //    }
 //}
 
-}
-
 

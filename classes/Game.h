@@ -16,9 +16,14 @@ class Wizard;
 class Spell;
 class Game {
 public:
-    list<Round,Round> rounds;
+    static list<Round> rounds;
 
-    static Round getRound(int);
+    static Round &getRound(int r) {
+       while (r > Game::rounds.size()) Game::rounds.push_back(Round{});
+       auto it = rounds.begin();
+       std::advance(it, r);
+       return *it;
+    }
 
 
 
@@ -156,5 +161,4 @@ public:
             // round++ na kano overload to increment
         }
     }
-
 };
