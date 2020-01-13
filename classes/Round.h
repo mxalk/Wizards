@@ -9,8 +9,6 @@
 #include "Action_Block.h"
 #include <stack>
 
-#define TILDES std::cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl
-
 using namespace std;
 
 class Round {

@@ -6,11 +6,6 @@
 
 using namespace std;
 
-void Round::print_round() {
-    TILDES;
-//    cout << "Round " << this->general << endl;
-    TILDES;
-}
 
 Round &Round::operator=(void (*action)(Wizard *, Wizard *)) {
     if (this->last_action == nullptr) new exception();

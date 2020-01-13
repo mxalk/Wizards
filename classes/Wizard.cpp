@@ -46,10 +46,6 @@ void Wizard::print_wizard() const {
             cout << "'" << s.name << "'" << " ";
 }
 
-void Wizard::print_wizard_name() {
-    cout << this->name;
-}
-
 void Wizard::operator[](const string& str) {
     stringstream ss(str);
     istream_iterator<string> begin(ss);
@@ -98,19 +94,8 @@ void Wizard::print_status() {
     cout << "##################" << endl << endl;
 }
 
-bool Wizard::hasWand() const {
-    return wand;
+Spell & Wizard::getSpell(const string& spell_name) {
+    for (Spell& s : Wizard::spells) {
+        if (spell_name == s.name) return s;
+    }
 }
-
-int Wizard::getHp() const {
-    return hp;
-}
-
-//vector<Spell> & Wizard::getSpell(string spell_name) {
-//    for (Spell s : Wizard::spells) {
-//        if (spell_name == s.name)
-//            return s;
-//    }
-//}
-
-

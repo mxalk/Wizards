@@ -3,4 +3,8 @@
 //
 #pragma once
 
+#define PRINT_ROUND(x)  std::cout<< "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl \
+                           << "Round " << x << std::endl \
+                           << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl
+
 extern int game_round;

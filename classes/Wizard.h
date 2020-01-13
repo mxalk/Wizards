@@ -34,13 +34,11 @@ public:
     void heal(Wizard *, int);
     void equip(Wizard *target, bool wand);
 
-    int getHp() const;
-    bool hasWand() const;
-
     void print_wizard() const;
-    void print_wizard_name();
     void spell_select(int x);
     void print_status();
+
+    Spell &getSpell(const string& spell_name);
 
     static Wizard& getWizard(const string& name) {
         for (Wizard& w : Wizard::all_wizards) {
@@ -59,7 +57,7 @@ public:
     }
 
     static float house_modifier(House attacker_house, House defender_house) {
-        float modifier = 1;
+        float modifier = 1.0;
 
         switch(attacker_house) {
             case Gryffindor:
@@ -99,4 +97,5 @@ public:
         if (house == "Ravenclaw") return Ravenclaw;
         throw exception();
     }
+
 };
