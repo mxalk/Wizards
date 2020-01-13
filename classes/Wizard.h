@@ -19,26 +19,26 @@ public:
     vector<Spell> spells;
     string name, house;
     House enum_house;
-    int max_hp, hp;
+    int max_hp, hp, player_number;
     bool wand;
-
-//    void operator-=(int);
-//    void operator+=(int);
+    
     Wizard &operator=(const Wizard &w);
     Wizard operator,(Wizard);
     void operator[](Wizard);
     void operator[](const string&);
 
-    Wizard *choose();
+    Wizard *choose(int player_number) const;
     void damage(Wizard *, int);
-    void heal(Wizard *, int);
+    int heal(Wizard *, int);
     void equip(Wizard *target, bool wand);
+    void ravenclaw_check();
 
     void print_wizard() const;
-    void spell_select(int x);
+    void print_spells_choose(int x);
     void print_status();
 
-    Spell &getSpell(const string& spell_name);
+    Spell *getSpell(const string &spell_name);
+    Spell *getSpell(const int &choice);
 
     static Wizard& getWizard(const string& name) {
         for (Wizard& w : Wizard::all_wizards) {

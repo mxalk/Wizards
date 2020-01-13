@@ -18,7 +18,7 @@ public:
 
     Round &operator=(void (*)(Wizard *, Wizard *));
     Round &addAction(Wizard *attacker, Wizard *defender);
-    void play(Wizard *player);
+    void play(Wizard *player, int phase);
     void print_round();
 
 };

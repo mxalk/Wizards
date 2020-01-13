@@ -20,7 +20,10 @@ class Wizard;
 class Spell;
 class Game {
 public:
-    static list<Round> rounds;
+    inline static list<Round> rounds;
+    inline static list<Wizard *> turns;
+    inline static int players;
+    inline static Wizard **wizards;
 
     static Round &getRound(int r) {
        while (r > Game::rounds.size()) Game::rounds.push_back(Round{});
@@ -62,27 +65,132 @@ public:
         Spell::print_spells();
     };
 
-    static bool choose_ok(int choice, int max) {
-        return (choice < 1 || choice > max);
+    static int choose_players(const string& input) {
+        try {
+            int i = stoi(input);
+            if (i < 2) return 0;
+            return i;
+        } catch (exception const &e) {}
+        return 0;
     }
-    static bool choose_ok(int choice, int min, int max) {
-        return (choice < min || choice > max);
+    static Wizard *choose_wizard(const string& input, int player_number) {
+        for (const Wizard &w:Wizard::all_wizards) if (w.name == input) return w.choose(player_number);
+        Wizard *w;
+        try {
+            int i = stoi(input);
+            w = &Wizard::all_wizards.at(i-1);
+            if (w->spells.empty()) {
+                cout << "Can't select " << w->name << " because the wizard knows no spells!" << endl;
+                return nullptr;
+            }
+            return w->choose(player_number);
+        } catch (exception const &e) {}
+        return nullptr;
+    }
+
+    static int alive_players_remaining() {
+        int alive_players = 0;
+        for (int i=0; i<players; i++) if (wizards[i]->hp > 0) alive_players++;
+        return alive_players;
+    }
+
+    static bool more_game() {
+        int alive_players = alive_players_remaining();
+        switch(alive_players) {
+            case 0:
+                cout << "DRAW! All wizards have been eliminated";
+                break;
+            case 1:
+                for (int i=0; i<players; i++) if (wizards[i]->hp > 0) {
+                    cout << "Player " << i+1 << " " << wizards[i]->name << " VICTORIOUS!" << endl;
+                    break;
+                }
+                break;
+            default:
+                return true;
+        }
+        return false;
+    }
+
+    static void reset_turns() {
+        for (int i = 0; i<players; i++) turns.push_back(wizards[i]);
+    }
+
+    static Spell *choose_spell(Wizard *player) {
+        Spell *s;
+        int player_number = player->player_number, number_of_spells;
+        string input;
+        do {
+            player->print_spells_choose(player_number);
+            getline (cin, input);
+            s = player->getSpell(input);
+            if (!s) {
+                try {
+                    int i = stoi(input);
+                    s = player->getSpell(i-1);
+                } catch (exception const &e) {
+                    cout << endl << R"(!INVALID CHOICE!!)" << endl;
+                }
+            }
+        } while (!s);
+        cout << "Player "<< player_number << " selected Spell: " << s->name <<endl;
+        cout << endl;
+        return s;
+    }
+
+    static void print_targets() {
+        Wizard *w;
+        for (int i = 0; i<players; i++) {
+            w = wizards[i];
+            cout << i+1 << ".) (" << w-> name << ") Player " << w->player_number << endl;
+        }
+    }
+
+    static Wizard *choose_target(int player_number) {
+        if (Game::players == 2) {
+            for (int i = 0; i<players; i++) if (wizards[i]->player_number != player_number) return wizards[i];
+        }
+        Wizard *w;
+        string input;
+        int i;
+        bool invalid;
+        do {
+            cout << "Player "<< player_number << " selects target:" << endl
+                 << "--------------------------" << endl;
+            Game::print_targets();
+            cout << "--------------------------" << endl;
+            cout << "Choose [1-" << players << " // Name]:";
+            getline (cin, input);
+            invalid = false;
+            try {
+                i = stoi(input);
+                if (i < 1 || i > players) invalid = true;
+            } catch (exception const &e) {
+                invalid = true;
+            }
+            if (invalid) cout << endl << R"(!INVALID CHOICE!!)" << endl;
+        } while (invalid);
+        return wizards[i-1];
     }
 
     static void duel() {
-        int p, wizards_size_choose = Wizard::all_wizards.size(), players, tmp;
+        int p, wizards_size_choose = Wizard::all_wizards.size(), tmp;
         bool invalid_choice;
+        string input;
+        Round current_round;
+        Wizard *player, *target;
+        Spell *s;
 
         cout << "----------------------------------- HARRY POTTER THE GAME -----------------------------------" << endl << endl;
 
         do {
-            cout << "Enter # of Players[2-6]:" << endl;
-            cin >> players;
-            invalid_choice = choose_ok(players, 2, 6);
-            if (invalid_choice) cout << endl << R"(!INVALID CHOICE!!)" << endl;
-        } while (invalid_choice);
+            cout << "Enter # of Players[2+]:" << endl;
+            getline (cin, input);
+            players = Game::choose_players(input);
+            if (!players) cout << endl << R"(!INVALID CHOICE!!)" << endl;
+        } while (!players);
 
-        Wizard *wizards[players];
+        wizards = new Wizard*[players];
 
         for (tmp = 0; tmp<players; tmp++) {
             do {
@@ -90,67 +198,36 @@ public:
                      << "--------------------------" << endl;
                 Wizard::print_wizards();
                 cout << "--------------------------" << endl;
-                cout << "Choose [1-" << wizards_size_choose << "]:";
-                cin >> p;
-                invalid_choice = choose_ok(p, wizards_size_choose);
-                if (invalid_choice) cout << endl << R"(!INVALID CHOICE!!)" << endl;
-            } while (invalid_choice);
-            wizards[tmp] = Wizard::all_wizards.at(p-1).choose();
+                cout << "Choose [1-" << wizards_size_choose << " // Name]:";
+                getline (cin, input);
+                wizards[tmp] = Game::choose_wizard(input, tmp);
+                if (!wizards[tmp]) cout << endl << R"(!INVALID CHOICE!!)" << endl;
+            } while (!wizards[tmp]);
             cout << "Player "<< tmp+1 << " selected wizard: " << wizards[tmp]->name <<endl;
             cout << endl;
         }
 
-        Wizard * w1 = wizards[0];
-        Wizard * w2 = wizards[1];
-
-        while ( w1->hp > 0 && w2->hp > 0) {
+        while (more_game()) {
+            game_round++;
             PRINT_ROUND(game_round);
-            if (w1->wand) {
-                Spell sp1;      string str1;
-                w1->spell_select(1);
-                getline (std::cin, str1);
-                sp1 = w1->Wizard::getSpell(str1);
-                // spell action
-                w1->print_status();
-                w2->print_status();
-            } else {
-                cout << w1->name << "(Player1) has no wand equipped, can't cast spell." << endl;
+            if (rounds.empty()) rounds.emplace_back();
+            current_round = rounds.front();
+            reset_turns();
+            while (!turns.empty()) {
+                player = turns.front();
+                turns.pop_front();
+                player->ravenclaw_check();
+                current_round.play(player, 1);
+                if (!player->wand) {
+                    cout << "Player " << player->player_number << " has no wand!" << endl;
+                    continue;
+                }
+                s = choose_spell(player);
+                target = choose_target(player->player_number);
+                s->action(player, target);
+                current_round.play(player, 2);
             }
-
-            if(w2->wand) {
-                Spell sp2;      string str2;
-                w2->spell_select(2);
-                getline (std::cin, str2);
-                sp2 = w2->Wizard::getSpell(str2);
-                // spell action
-                w1->print_status();
-                w2->print_status();
-            } else {
-                cout << w2->name << "(Player2) has no wand equipped, can't cast spell." << endl;
-            }
-
-            ++game_round;
+            rounds.pop_front();
         }
     }
 };
-
-// anti gia    while ( w1->hp > 0 && w2->hp > 0)
-// vale auto   while (count < players - 1)
-
-// sto telos tis while:
-
-//        int count = 0;
-//        Wizard * winner;
-//        for (int i = 0; i < players; ++i) {
-//            if (wizards[i]->hp <= 0)
-//                count++;
-//            winner = wizards[i];
-//        }
-
-// e3o apo ti while:
-
-//        if (count < players) {
-//            cout << "AND THE WINNER IS  " << winner->name; << " !!!" << endl;
-//        } else {
-//            cout << "THEY ARE ALL DEAD" << endl;
-//        }

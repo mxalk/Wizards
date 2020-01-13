@@ -36,23 +36,23 @@ BEGIN_GAME
 //                HEAL DEFENDER 20
 //                EQUIP DEFENDER _
 //                EQUIP ATTACKER ---α
-                IF GET_HP(DEFENDER) <= 20 DO
-//                    DAMAGE DEFENDER 10
-                ELSE_IF GET_HP(DEFENDER) <= 50 DO
-//                    DAMAGE DEFENDER 20
-                ELSE
-//                    DAMAGE DEFENDER 30
-                    SHOW "LALALLA1"
-                END
+//                 IF GET_HP(DEFENDER) <= 20 DO
+// //                    DAMAGE DEFENDER 10
+//                 ELSE_IF GET_HP(DEFENDER) <= 50 DO
+// //                    DAMAGE DEFENDER 20
+//                 ELSE
+// //                    DAMAGE DEFENDER 30
+//                     SHOW "LALALLA1"
+//                 END
 
-                FOR 5 ROUNDS DO
-                    IF GET_HP(ATTACKER) > 20 DO
-                        SHOW round_offset
-                    END
-                END
-                AFTER 2 ROUNDS DO
-                    attacker->damage(defender, 25);
-                END
+                // FOR 5 ROUNDS DO
+                //     IF GET_HP(ATTACKER) > 20 DO
+                //         SHOW round_offset
+                //     END
+                // END
+                // AFTER 2 ROUNDS DO
+                //     attacker->damage(defender, 25);
+                // END
         END
     }
     CREATE SPELLS [
@@ -69,11 +69,18 @@ BEGIN_GAME
                     END
             }
     ]
-
-     MRS "Hermione Granger" LEARN [
-             SPELL_NAME(spell1)
-             SPELL_NAME(spell2)
-         ]
+    MRS "Harry Potter" LEARN [
+        SPELL_NAME(spell1)
+        SPELL_NAME(spell3)
+    ]
+    
+    MRS "Hermione Granger" LEARN [
+        SPELL_NAME(spell1)
+        SPELL_NAME(spell2)
+    ]
+    MRS "Luna Lovegood" LEARN [
+        SPELL_NAME(spell3)
+    ]
 
 DUEL
 END_GAME

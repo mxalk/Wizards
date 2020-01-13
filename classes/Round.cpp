@@ -13,12 +13,23 @@ Round &Round::operator=(void (*action)(Wizard *, Wizard *)) {
     return *this;
 }
 
-void Round::play(Wizard *player) {
-    for (Action_Block *ab: this->actions) {
-        if (ab->defender != player) continue;
-        ab->play();
-        free(ab);
-    }
+void Round::play(Wizard *player, int phase) {
+    Action_Block *block;
+    bool replay;
+    do {
+        replay = false;
+        for (auto it = this->actions.begin(); it != this->actions.end();) {
+            block = *it;
+            if ((phase==1 && block->defender != player) || (phase == 2 && block->defender != player && block->attacker != player)) {
+                it++;
+                continue;
+            }
+            block->play();
+            this->actions.erase(it);
+            free(block);
+            replay = true;
+        }
+    } while (replay);
 }
 
 Round &Round::addAction(Wizard *attacker, Wizard *defender) {
@@ -26,7 +37,3 @@ Round &Round::addAction(Wizard *attacker, Wizard *defender) {
     this->last_action = ab;
     this->actions.push_back(ab);
 }
-
-
-
-

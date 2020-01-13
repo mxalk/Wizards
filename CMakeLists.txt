@@ -14,7 +14,6 @@ add_executable(Wizards
         classes/Wizard.h
         classes/Spell.cpp
         classes/Spell.h
-        classes/Game.cpp
         classes/Game.h
         classes/Action.h
         classes/Action_Damage.h
