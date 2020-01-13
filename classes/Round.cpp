@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 Round &Round::operator=(void (*action)(Wizard *, Wizard *)) {
     if (this->last_action == nullptr) new exception();
     this->last_action->action=action;
@@ -34,6 +33,10 @@ void Round::play(Wizard *player, int phase) {
 
 Round &Round::addAction(Wizard *attacker, Wizard *defender) {
     Action_Block *ab = new Action_Block{attacker, defender};
+    cout << "HERE" << endl;
     this->last_action = ab;
+    cout << "HERE1" << endl;
     this->actions.push_back(ab);
+    cout << "HERE2" << endl;
+    return *this;
 }

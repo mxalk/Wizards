@@ -123,6 +123,7 @@ public:
         do {
             player->print_spells_choose(player_number);
             getline (cin, input);
+            if (input == "exit") exit(-1);
             s = player->getSpell(input);
             if (!s) {
                 try {
@@ -161,6 +162,7 @@ public:
             cout << "--------------------------" << endl;
             cout << "Choose [1-" << players << " // Name]:";
             getline (cin, input);
+            if (input == "exit") exit(-1);
             invalid = false;
             try {
                 i = stoi(input);
@@ -186,6 +188,7 @@ public:
         do {
             cout << "Enter # of Players[2+]:" << endl;
             getline (cin, input);
+            if (input == "exit") exit(-1);
             players = Game::choose_players(input);
             if (!players) cout << endl << R"(!INVALID CHOICE!!)" << endl;
         } while (!players);
@@ -200,6 +203,7 @@ public:
                 cout << "--------------------------" << endl;
                 cout << "Choose [1-" << wizards_size_choose << " // Name]:";
                 getline (cin, input);
+                if (input == "exit") exit(-1);
                 wizards[tmp] = Game::choose_wizard(input, tmp);
                 if (!wizards[tmp]) cout << endl << R"(!INVALID CHOICE!!)" << endl;
             } while (!wizards[tmp]);
@@ -210,7 +214,7 @@ public:
         while (more_game()) {
             game_round++;
             PRINT_ROUND(game_round);
-            if (rounds.empty()) rounds.emplace_back();
+            if (rounds.empty()) rounds.push_back(Round());
             current_round = rounds.front();
             reset_turns();
             while (!turns.empty()) {
@@ -226,6 +230,8 @@ public:
                 target = choose_target(player->player_number);
                 s->action(player, target);
                 current_round.play(player, 2);
+                for (int i = 0; i<players; i++) {wizards[i]->print_status(); cout<<endl;}
+
             }
             rounds.pop_front();
         }

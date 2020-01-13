@@ -57,7 +57,7 @@ void Wizard::damage(Wizard *target, int amount) {
 int Wizard::heal(Wizard *target, int amount) {
     target->hp += amount;
     if (target->hp > target->max_hp) {
-        int actual = target->hp - target->max_hp;
+        int actual = amount - (target->hp - target->max_hp);
         target->hp = target->max_hp;
         return actual;
     }
@@ -78,12 +78,17 @@ Wizard *Wizard::choose(int player_number) const {
 }
 
 void Wizard::print_status() {
-    cout << "##################" << endl
+    cout <<        "***************************" << endl
+         << "Player: " << this->player_number << endl
          << "Name: " << this->name << endl
-         << "Hp: " << this->hp << endl;
-    if (this->wand) cout << "Wand Equipped";
-    else            cout << "Wand Unequipped";
-    cout << "##################" << endl << endl;
+         << "[ ";
+         for (int i=0; i<10*(this->hp/this->max_hp); i++)
+         cout << '#';
+         cout << " ]" << endl;
+    cout << "Hp: " << this->hp << "/" << this->max_hp << endl;
+    if (this->wand) cout << "-----@";
+    else            cout << "-----X";
+    cout << endl << "***************************" << endl;
 }
 
 Spell *Wizard::getSpell(const string& spell_name) {
@@ -101,5 +106,7 @@ void Wizard::ravenclaw_check() {
     if (this->enum_house != Ravenclaw || game_round%2 == 1) return;
     int i = this->max_hp * 0.05;
     i = this->heal(this, i);
-    cout << "Wizard of House Ravenclaw heals self for " << i << " HP" << endl;
+    if(i==this->max_hp)  cout << "Wizard of House Ravenclaw has full health, heal skipped" << endl;
+    else                 cout << "Wizard of House Ravenclaw heals self for " << i << " HP" << endl;
+    cout << endl;
 }

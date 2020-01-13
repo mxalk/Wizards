@@ -44,6 +44,9 @@ BEGIN_GAME
 // //                    DAMAGE DEFENDER 30
 //                     SHOW "LALALLA1"
 //                 END
+                AFTER 0 ROUNDS DO
+                    attacker->damage(defender, 20);
+                END
 
                 // FOR 5 ROUNDS DO
                 //     IF GET_HP(ATTACKER) > 20 DO
@@ -59,13 +62,13 @@ BEGIN_GAME
             SPELL {
                     NAME: "spell2",
                     ACTION: START
-                SHOW "LALALLA2"
+                SHOW "LALALLA2\n"
                     END
             },
             SPELL {
                     NAME: "spell3",
                     ACTION: START
-                        SHOW "LALALLA3"
+                        SHOW "LALALLA3\n"
                     END
             }
     ]
