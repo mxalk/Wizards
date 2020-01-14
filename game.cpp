@@ -59,9 +59,11 @@ BEGIN_GAME
 
                  FOR 5 ROUNDS DO
                     SHOW "NESTED" << endl;
-//                     IF GET_HP(ATTACKER) > 20 DO
-//                         SHOW round_offset
-//                     END
+                     IF GET_HP(ATTACKER) > 20 DO
+                         SHOW "NESTED IF" << endl;
+                     END
+                     ;attacker->damage(defender, 20);
+                     attacker->heal(attacker, 20);
                  END
                 // AFTER 2 ROUNDS DO
                 //     attacker->damage(defender, 25);

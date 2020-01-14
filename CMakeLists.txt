@@ -19,6 +19,4 @@ add_executable(Wizards
         classes/Action_Damage.h
         classes/global.h
         classes/global.cpp
-        classes/Round.cpp 
-        classes/Round.h
         classes/Action_Block.h)

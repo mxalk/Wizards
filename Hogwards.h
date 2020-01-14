@@ -55,7 +55,7 @@
 #define IF ; if (
 #define ELSE_IF ;}; else if (
 #define ELSE ;}; else {
-#define DO ) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) { \
+#define DO ) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) { \
     int round_offset = 0;
 
 #define FOR ;for (round_offset=0; round_offset<

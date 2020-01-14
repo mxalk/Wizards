@@ -41,27 +41,27 @@ void test() {
 //                ;DAMAGE defender 20
 //                ;EQUIP defender _
 //                ;EQUIP attacker ---α
-                ;if ( defender->hp <= 20 ) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;if ( defender->hp <= 20 ) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
 //                            DAMAGE DEFENDER 10
                             attacker->damage(defender, 10);
-                ;}; else if ( defender->hp <= 50 ) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;}; else if ( defender->hp <= 50 ) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
 //                            DAMAGE DEFENDER 20
                                 attacker->damage(defender, 20);
-                ;}; else Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;}; else Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
 //                            DAMAGE DEFENDER 30
                                 attacker->damage(defender, 30);
                 ;}
-                ;for (round_offset=0; round_offset<5; round_offset++) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;for (round_offset=0; round_offset<5; round_offset++) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
                                 int round_offset = 0;
 //                            DAMAGE DEFENDER 30
                                 attacker->damage(defender, 30)
-                                ;if ( defender->hp <= 20 ) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                                ;if ( defender->hp <= 20 ) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
 //                                    DAMAGE DEFENDER 10
                                     attacker->damage(defender, 10);
                                 ;}
                 ;}
 
-                ;round_offset=0;if (round_offset += 0; round_offset++) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;round_offset=0;if (round_offset += 0; round_offset++) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) {
 
                 ;}
 
