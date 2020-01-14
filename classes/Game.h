@@ -26,10 +26,10 @@ public:
     inline static Wizard **wizards;
 
     static Round &getRound(int r) {
-       while (r > Game::rounds.size()) Game::rounds.push_back(Round{});
-       auto it = rounds.begin();
-       std::advance(it, r);
-       return *it;
+        while (r >= Game::rounds.size()) Game::rounds.emplace_back();
+        auto it = rounds.begin();
+        std::advance(it, r);
+        return *it;
     }
 
 //    static int get_hp(Wizard &w) { return w.hp; };
@@ -214,7 +214,7 @@ public:
         while (more_game()) {
             game_round++;
             PRINT_ROUND(game_round);
-            if (rounds.empty()) rounds.push_back(Round());
+            if (rounds.empty()) rounds.emplace_back();
             current_round = rounds.front();
             reset_turns();
             while (!turns.empty()) {

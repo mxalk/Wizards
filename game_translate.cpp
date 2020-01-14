@@ -61,7 +61,7 @@ void test() {
                                 ;}
                 ;}
 
-                ;if (round_offset = 0; round_offset++) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
+                ;round_offset=0;if (round_offset += 0; round_offset++) Game::getRound(round_offset).addAction(attacker, defender) = [](Wizard *attacker, Wizard *defender) {
 
                 ;}
 

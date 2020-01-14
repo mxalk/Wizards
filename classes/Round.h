@@ -13,11 +13,11 @@ using namespace std;
 
 class Round {
 public:
-    vector<Action_Block *> actions;
-    Action_Block *last_action;
+    vector<Action_Block *> actions{};
 
-    Round &operator=(void (*)(Wizard *, Wizard *));
-    Round &addAction(Wizard *attacker, Wizard *defender);
+    Round();
+
+    Action_Block &addAction(Wizard *attacker, Wizard *defender);
     void play(Wizard *player, int phase);
     void print_round();
 

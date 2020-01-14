@@ -76,15 +76,15 @@ Wizard *Wizard::choose(int player_number) const {
     w->player_number = player_number;
     return w;
 }
-
+#define HP_WIDTH 20
 void Wizard::print_status() {
+    string tmp = "";
+    for (int i=0; i<HP_WIDTH*this->hp/this->max_hp; i++) tmp += '#';
+    for (int i=0; i<HP_WIDTH-HP_WIDTH*this->hp/this->max_hp; i++) tmp += ' ';
     cout <<        "***************************" << endl
          << "Player: " << this->player_number << endl
          << "Name: " << this->name << endl
-         << "[ ";
-         for (int i=0; i<10*(this->hp/this->max_hp); i++)
-         cout << '#';
-         cout << " ]" << endl;
+         << "[ " << tmp << " ]" << endl;
     cout << "Hp: " << this->hp << "/" << this->max_hp << endl;
     if (this->wand) cout << "-----@";
     else            cout << "-----X";

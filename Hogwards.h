@@ -60,7 +60,7 @@
 
 #define FOR ;for (round_offset=0; round_offset<
 #define ROUNDS ; round_offset++
-#define AFTER ;if (round_offset=
+#define AFTER ;round_offset=0;if (round_offset+=
 
 #define SHOW ;cout<<
 

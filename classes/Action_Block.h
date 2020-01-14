@@ -20,6 +20,10 @@ public:
         this->action = nullptr;
     };
 
+    Action_Block &operator=(void (*action)(Wizard *, Wizard *)) {
+        this->action = action;
+    }
+
     void play() {
         this->action(attacker, defender);
     }

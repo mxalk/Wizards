@@ -36,23 +36,33 @@ BEGIN_GAME
 //                HEAL DEFENDER 20
 //                EQUIP DEFENDER _
 //                EQUIP ATTACKER ---α
-//                 IF GET_HP(DEFENDER) <= 20 DO
-// //                    DAMAGE DEFENDER 10
-//                 ELSE_IF GET_HP(DEFENDER) <= 50 DO
-// //                    DAMAGE DEFENDER 20
-//                 ELSE
-// //                    DAMAGE DEFENDER 30
-//                     SHOW "LALALLA1"
-//                 END
-                AFTER 0 ROUNDS DO
+                 IF GET_HP(DEFENDER) <= 20 DO
+                        SHOW "DAMAGING " << 10 << endl;
+ //                    DAMAGE DEFENDER 10
+                    attacker->damage(defender, 10);
+                 ELSE_IF GET_HP(DEFENDER) <= 50 DO
+                        SHOW "DAMAGING " << 20 << endl;
+ //                    DAMAGE DEFENDER 20
                     attacker->damage(defender, 20);
-                END
+                 ELSE
+                        SHOW "DAMAGING " << 30 << endl;
+ //                    DAMAGE DEFENDER 30
+                    attacker->damage(defender, 30);
+//                     SHOW "LALALLA1"
+                 END
+//                 SHOW "AFTER START" << endl;
+//                AFTER 1 ROUNDS DO
+//                    SHOW "AFTER 1" << endl;
+//                    attacker->damage(defender, 20);
+//                END
+//            SHOW "AFTER END" << endl;
 
-                // FOR 5 ROUNDS DO
-                //     IF GET_HP(ATTACKER) > 20 DO
-                //         SHOW round_offset
-                //     END
-                // END
+                 FOR 5 ROUNDS DO
+                    SHOW "NESTED" << endl;
+//                     IF GET_HP(ATTACKER) > 20 DO
+//                         SHOW round_offset
+//                     END
+                 END
                 // AFTER 2 ROUNDS DO
                 //     attacker->damage(defender, 25);
                 // END
