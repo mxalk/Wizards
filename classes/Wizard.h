@@ -5,6 +5,7 @@
 
 #include "classes/global.h"
 #include "classes/Spell.h"
+#include "classes/Wand.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -19,22 +20,24 @@ public:
     vector<Spell> spells;
     string name, house;
     House enum_house;
-    int max_hp, hp, player_number;
-    bool wand;
-    
+    int max_hp, hp, player_number, action_amount;
+    bool wand, wand_to_have;
+
+    Wizard *operator=(int amount);
+    Wizard *operator=(Wand w);
     Wizard &operator=(const Wizard &w);
     Wizard operator,(Wizard);
     void operator[](Wizard);
     void operator[](const string&);
 
     Wizard *choose(int player_number) const;
-    void damage(Wizard *, int);
+    int damage(Wizard *, int);
     int heal(Wizard *, int);
     void equip(Wizard *target, bool wand);
-    void ravenclaw_check();
+    void ravenclaw_heal();
 
     void print_wizard() const;
-    void print_spells_choose(int x);
+    void print_spells_choose();
     void print_status();
 
     Spell *getSpell(const string &spell_name);

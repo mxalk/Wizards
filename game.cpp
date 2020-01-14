@@ -30,25 +30,18 @@ BEGIN_GAME
         HP: 100
     }
     CREATE SPELL {
-        NAME: "spell1",
+        NAME: "BOOM",
         ACTION: START
 //               DAMAGE ATTACKER 25
 //                HEAL DEFENDER 20
 //                EQUIP DEFENDER _
 //                EQUIP ATTACKER ---α
                  IF GET_HP(DEFENDER) <= 20 DO
-                        SHOW "DAMAGING " << 10 << endl;
- //                    DAMAGE DEFENDER 10
-                    attacker->damage(defender, 10);
+                     DAMAGE DEFENDER 10
                  ELSE_IF GET_HP(DEFENDER) <= 50 DO
-                        SHOW "DAMAGING " << 20 << endl;
- //                    DAMAGE DEFENDER 20
-                    attacker->damage(defender, 20);
+                     DAMAGE DEFENDER 20
                  ELSE
-                        SHOW "DAMAGING " << 30 << endl;
- //                    DAMAGE DEFENDER 30
-                    attacker->damage(defender, 30);
-//                     SHOW "LALALLA1"
+                     DAMAGE DEFENDER 30
                  END
 //                 SHOW "AFTER START" << endl;
 //                AFTER 1 ROUNDS DO
@@ -57,14 +50,14 @@ BEGIN_GAME
 //                END
 //            SHOW "AFTER END" << endl;
 
-                 FOR 5 ROUNDS DO
-                    SHOW "NESTED" << endl;
-                     IF GET_HP(ATTACKER) > 20 DO
-                         SHOW "NESTED IF" << endl;
-                     END
-                     ;attacker->damage(defender, 20);
-                     attacker->heal(attacker, 20);
-                 END
+//                 FOR 5 ROUNDS DO
+//                    SHOW "NESTED" << endl;
+//                     IF GET_HP(ATTACKER) > 20 DO
+//                         SHOW "NESTED IF" << endl;
+//                     END
+////                     ;attacker->damage(defender, 20);
+////                     attacker->heal(attacker, 20);
+//                 END
                 // AFTER 2 ROUNDS DO
                 //     attacker->damage(defender, 25);
                 // END
@@ -72,29 +65,78 @@ BEGIN_GAME
     }
     CREATE SPELLS [
             SPELL {
-                    NAME: "spell2",
+                    NAME: "DAMAGE",
                     ACTION: START
-                SHOW "LALALLA2\n"
+                        DAMAGE DEFENDER 30
                     END
             },
             SPELL {
-                    NAME: "spell3",
+                    NAME: "HEAL",
                     ACTION: START
-                        SHOW "LALALLA3\n"
+                        HEAL ATTACKER 30
+                    END
+            },
+            SPELL {
+                    NAME: "DOT",
+                    ACTION: START
+                            FOR 5 ROUNDS DO
+                                    DAMAGE DEFENDER 10
+                            END
+                    END
+            },
+            SPELL {
+                    NAME: "HOT",
+                    ACTION: START
+                            FOR 5 ROUNDS DO
+                                    HEAL ATTACKER 10
+                            END
+                    END
+            },
+            SPELL {
+                    NAME: "UNEQUIP",
+                    ACTION: START
+                            DAMAGE DEFENDER 5
+                            EQUIP DEFENDER _
+                            AFTER 1 ROUNDS DO
+                                    SHOW "AFTER 1" << endl;
+                                    EQUIP DEFENDER ---O
+                            END
+                    END
+            },
+            SPELL {
+                    NAME: "AFTER_TEST",
+                    ACTION: START
+                            AFTER 1 ROUNDS DO
+                                    SHOW "AFTER 1" << endl;
+                            END
                     END
             }
     ]
     MRS "Harry Potter" LEARN [
-        SPELL_NAME(spell1)
-        SPELL_NAME(spell3)
+            SPELL_NAME(DAMAGE)
+            SPELL_NAME(DOT)
+            SPELL_NAME(HOT)
+            SPELL_NAME(UNEQUIP)
+            SPELL_NAME(AFTER_TEST)
     ]
-    
     MRS "Hermione Granger" LEARN [
-        SPELL_NAME(spell1)
-        SPELL_NAME(spell2)
+            SPELL_NAME(DAMAGE)
+            SPELL_NAME(DOT)
+            SPELL_NAME(HOT)
+            SPELL_NAME(UNEQUIP)
+            SPELL_NAME(AFTER_TEST)
     ]
     MRS "Luna Lovegood" LEARN [
-        SPELL_NAME(spell3)
+            SPELL_NAME(DAMAGE)
+            SPELL_NAME(DOT)
+            SPELL_NAME(HOT)
+            SPELL_NAME(UNEQUIP)
+    ]
+    MRS "Draco Malfoy" LEARN [
+            SPELL_NAME(DAMAGE)
+            SPELL_NAME(DOT)
+            SPELL_NAME(HOT)
+            SPELL_NAME(UNEQUIP)
     ]
 
 DUEL

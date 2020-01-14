@@ -16,7 +16,5 @@ add_executable(Wizards
         classes/Spell.h
         classes/Game.h
         classes/Action.h
-        classes/Action_Damage.h
         classes/global.h
-        classes/global.cpp
         classes/Action_Block.h)

@@ -7,6 +7,7 @@
 #include "classes/Spell.h"
 #include "global.h"
 #include "Action_Block.h"
+#include "Action.h"
 #include <list>
 #include <string>
 #include <cstdarg>
@@ -25,10 +26,21 @@ public:
     inline static int players;
     inline static Wizard **wizards;
 
-    static Action_Block &addActionBlock(Wizard *attacker, Wizard *defender, int rounds_total) {
-        auto *ab = new Action_Block(attacker, defender, rounds_total);
+    static Action_Block &addActionBlock(Wizard *attacker, Wizard *defender, Spell *source, int rounds_total) {
+        auto *ab = new Action_Block(attacker, defender, source, rounds_total);
         actions.push_back(ab);
         return *ab;
+    }
+
+    static void cast(Wizard *attacker, Wizard *defender, Spell *source) {
+        cout << "Player " << attacker->player_number << " (" << attacker->name << ") casts "
+             << source->name << " targeting ";
+        if(attacker!=defender) {
+            cout << "Player " << defender->player_number << " (" << defender->name << ")" << endl;
+        } else cout << "self" << endl;
+        Action_Block ab(attacker, defender, source, 0);
+        ab = source->action;
+        ab.play();
     }
 
     static void play(Wizard *player, bool spellcasting_phase) {
@@ -36,15 +48,15 @@ public:
         bool replay;
         do {
             replay = false;
-            cout << "--------------------------------SIZE: " << actions.size() << endl;
+//            cout << "--------------------------------SIZE: " << actions.size() << endl;
             for (auto it = actions.begin(); it != actions.end();) {
                 block = *it;
-                cout << "--------------------------------BLOCK MIGHT BE EXECUTED " << player << " rounds:" << block->rounds_remaining << " defender:" << block->defender << " attacker:" << block->attacker << endl;
+//                cout << "--------------------------------BLOCK MIGHT BE EXECUTED " << player << " rounds:" << block->rounds_remaining << " defender:" << block->defender << " attacker:" << block->attacker << endl;
                 if (block->rounds_remaining > 0 || (/*!spellcasting_phase && block->defender != player) || (spellcasting_phase && */block->defender != player && block->attacker != player)) {
                     it++;
                     continue;
                 }
-                cout << "--------------------------------BLOCK IS BEING EXECUTED" << endl;
+//                cout << "--------------------------------BLOCK IS BEING EXECUTED" << endl;
                 block->play();
                 actions.erase(it);
                 free(block);
@@ -52,11 +64,6 @@ public:
             }
         } while (replay);
     }
-
-//    static int get_hp(Wizard &w) { return w.hp; };
-//    static string get_house(Wizard &w) { return w.house; }
-//    static string get_name(Wizard &w) { return w.name; }
-//    static bool has_wand(Wizard &w) { return w.wand; }
 
     template <typename Arg>
     static bool and_func(Arg arg1, Arg arg2) {return arg1 && arg2;}
@@ -77,7 +84,6 @@ public:
             or_func(arg1,arg2);
             return or_func(tmp, rest...);
     }
-
 
     static bool not_f(bool arg) { return !arg; };
 
@@ -123,14 +129,14 @@ public:
                 break;
             case 1:
                 for (int i=0; i<players; i++) if (wizards[i]->hp > 0) {
-                    cout << "Player " << i+1 << " " << wizards[i]->name << " VICTORIOUS!" << endl;
+                    cout << "Player " << i+1 << " (" << wizards[i]->name << ") VICTORIOUS!" << endl;
                     break;
                 }
                 break;
             default:
                 return true;
         }
-        return false;
+        exit(0);
     }
 
     static void reset_turns() {
@@ -139,10 +145,9 @@ public:
 
     static Spell *choose_spell(Wizard *player) {
         Spell *s;
-        int player_number = player->player_number, number_of_spells;
         string input;
         do {
-            player->print_spells_choose(player_number);
+            player->print_spells_choose();
             getline (cin, input);
             if (input == "exit") exit(-1);
             s = player->getSpell(input);
@@ -155,7 +160,7 @@ public:
                 }
             }
         } while (!s);
-        cout << "Player "<< player_number << " selected Spell: " << s->name <<endl;
+        cout << "Player "<< player->player_number << " selected Spell: " << s->name <<endl;
         cout << endl;
         return s;
     }
@@ -196,6 +201,28 @@ public:
         return wizards[i-1];
     }
 
+//    #define WIZARD_WIDTH 24
+//    #define HP_WIDTH 20
+//    void print_wizards() {
+//        int i;
+//        Wizard *w;
+//        for (i=0; i<players; i++) {
+//            w = wizards[i];
+//            cout
+//        }
+//        string tmp = "";
+//        for (int i=0; i<HP_WIDTH*this->hp/this->max_hp; i++) tmp += '#';
+//        for (int i=0; i<HP_WIDTH-HP_WIDTH*this->hp/this->max_hp; i++) tmp += ' ';
+//        cout <<        "***************************" << endl
+//             << "Player: " << this->player_number << endl
+//             << "Name: " << this->name << endl
+//             << "[ " << tmp << " ]" << endl;
+//        cout << "Hp: " << this->hp << "/" << this->max_hp << endl;
+//        if (this->wand) cout << "-----@";
+//        else            cout << "-----X";
+//        cout << endl << "***************************" << endl;
+//    }
+
     static void duel() {
         int p, wizards_size_choose = Wizard::all_wizards.size(), tmp;
         bool invalid_choice;
@@ -224,13 +251,14 @@ public:
                 cout << "Choose [1-" << wizards_size_choose << " // Name]:";
                 getline (cin, input);
                 if (input == "exit") exit(-1);
-                wizards[tmp] = Game::choose_wizard(input, tmp);
+                wizards[tmp] = Game::choose_wizard(input, tmp+1);
                 if (!wizards[tmp]) cout << endl << R"(!INVALID CHOICE!!)" << endl;
             } while (!wizards[tmp]);
             cout << "Player "<< tmp+1 << " selected wizard: " << wizards[tmp]->name <<endl;
             cout << endl;
         }
 
+        game_round = 0;
         while (more_game()) {
             game_round++;
             PRINT_ROUND(game_round);
@@ -238,18 +266,19 @@ public:
             while (!turns.empty()) {
                 player = turns.front();
                 turns.pop_front();
-                player->ravenclaw_check();
+                player->ravenclaw_heal();
                 for (auto & action : actions) if (action->attacker == player) action->rounds_remaining--;
                 Game::play(player, false);
+                for (int i = 0; i<players; i++) {wizards[i]->print_status(); cout<<endl;}
+                if (player->hp == 0) continue;
                 if (!player->wand) {
                     cout << "Player " << player->player_number << " has no wand!" << endl;
                     continue;
                 }
                 s = choose_spell(player);
                 target = choose_target(player->player_number);
-                s->action(player, target);
+                Game::cast(player, target, s);;
                 Game::play(player, true);
-                for (int i = 0; i<players; i++) {wizards[i]->print_status(); cout<<endl;}
             }
         }
     }

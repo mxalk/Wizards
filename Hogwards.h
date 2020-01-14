@@ -6,7 +6,7 @@
 #include "classes/Wizard.h"
 #include "classes/Spell.h"
 #include "classes/Game.h"
-#include "classes/Action_Damage.h"
+#include "classes/Action.h"
 #include <iostream>
 #include <stack>
 
@@ -29,39 +29,46 @@
 
 #define SPELL tmps = Spell
 #define SPELLS Spell {}
-#define ACTION .action = (false)?[](Wizard *attacker, Wizard *defender){}
-#define START [](Wizard *attacker, Wizard *defender) {\
-    int round_offset = 0;
+#define ACTION .action = (false)?[](Wizard *attacker, Wizard *defender, Spell *source){}
+#define START [](Wizard *attacker, Wizard *defender, Spell *source) {\
+    int round_offset = 0; Action dummy;
 #define END ; }
-//#define α "
-//#define _ "
+#define O Wand()
+#define _ Wand()
 
-#define ATTACKER attacker
-#define DEFENDER defender
+#define ATTACKER attacker=
+#define DEFENDER defender=
 
-#define DAMAGE ;
-#define HEAL ;
-#define EQUIP ;
+#define DAMAGE ; dummy = Action(1, attacker, source) = *
+#define HEAL ; dummy = Action(2, attacker, source) = *
+#define EQUIP ; dummy = Action(3, attacker, source) = *
 
-#define GET_HP(wizard) wizard->hp
-#define GET_HOUSE(wizard) wizard->house
-#define GET_NAME(wizard) wizard->name
-#define HAS_WAND(wizard) wizard->wand
+#define GET_HP(wizard) (*wizard 0)->hp
+#define GET_HOUSE(wizard) (*wizard 0)->house
+#define GET_NAME(wizard) (*wizard 0)->name
+#define HAS_WAND(wizard) (*wizard 0)->wand
 
 #define AND Game::and_f
 #define OR Game::or_f
 #define NOT Game::not_f
 
-#define IF ; if (
+#define IF ;flag=0; if (
 #define ELSE_IF ;}; else if (
 #define ELSE ;}; else {
-#define DO ) Game::addActionBlock(attacker, defender, round_offset) = [](Wizard *attacker, Wizard *defender) { \
-    int round_offset = 0;
+#define DO ) Game::addActionBlock(attacker, defender, source, round_offset) = [](Wizard *attacker, Wizard *defender, Spell *source) { \
+    int round_offset = 0; Action dummy;
 
-#define FOR ;for (round_offset=0; round_offset<
+// FOR 2 ROUNDS DO
+// for (round offset=0; round_offset< 2 ; round_offset++)
+// after 2 rounds do
+// for (round_offset=0; round_offset+= 2 ; round_offset++)
+// for (round_offset=0;  if(1) round_offset+= 2 //; round_offset++)
+#define FOR ; for (round_offset=0; round_offset<
 #define ROUNDS ; round_offset++
-#define AFTER ;round_offset=0;if (round_offset+=
-
+#define AFTER ;if (round_offset=
+// define AFTER ;while(round_offset< 5 ; round_offset++) DO...
+// if ( true || round_offset=X   ;round_offset++   ) Game::addActionBlock
+//        AFTER     | X  |         ROUNDS          DO
 #define SHOW ;cout<<
 
 

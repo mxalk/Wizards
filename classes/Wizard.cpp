@@ -41,17 +41,22 @@ void Wizard::operator[](const string& str) {
     for (const string& spell_name : vstrings) this->spells.push_back(Spell::getSpell(spell_name));
 }
 
-void Wizard::print_spells_choose(int x) {
-    cout << this->name << "(Player" << x << ") select spell" << endl;
-    cout << "-----------------------------------" << endl;
-    for (const Spell &s : this->spells) cout << s.name << endl;
-    cout << "-----------------------------------" << endl;
+void Wizard::print_spells_choose() {
+    int i = 1;
+    cout << "Player " << this->player_number << " (" << this->name << ") selects spell" << endl;
+    cout << "---------------------------------------------------------------------------------" << endl;
+    cout << "|| ";
+    for (const Spell &s : this->spells) cout << i++ << ". " << s.name << " || ";
+    cout << endl;
+    cout << "---------------------------------------------------------------------------------" << endl;
     cout << "Choose [1-" << this->spells.size() << " // Name]:";
 }
 
-void Wizard::damage(Wizard *target, int amount) {
-    target->hp -= amount * Wizard::house_modifier(this->enum_house, target->enum_house);
+int Wizard::damage(Wizard *target, int amount) {
+    int actual = Wizard::house_modifier(this->enum_house, target->enum_house) * amount;
+    target->hp -= actual;
     if (target->hp < 0) target->hp = 0;
+    return actual;
 }
 
 int Wizard::heal(Wizard *target, int amount) {
@@ -102,11 +107,21 @@ Spell *Wizard::getSpell(const int &choice) {
     return nullptr;
 }
 
-void Wizard::ravenclaw_check() {
+void Wizard::ravenclaw_heal() {
     if (this->enum_house != Ravenclaw || game_round%2 == 1) return;
     int i = this->max_hp * 0.05;
     i = this->heal(this, i);
-    if(i==this->max_hp)  cout << "Wizard of House Ravenclaw has full health, heal skipped" << endl;
-    else                 cout << "Wizard of House Ravenclaw heals self for " << i << " HP" << endl;
+    if(i==this->max_hp)  cout << "Wizard of House Ravenclaw has full health, heal skipped";
+    else                 cout << "Wizard of House Ravenclaw heals self for " << i << " HP";
     cout << endl;
+}
+
+Wizard *Wizard::operator=(int amount) {
+    this->action_amount = amount;
+    return this;
+}
+
+Wizard *Wizard::operator=(Wand w) {
+    this->wand_to_have = w.wand;
+    return this;
 }
