@@ -48,27 +48,20 @@
 #define GET_NAME(wizard) (*wizard 0)->name
 #define HAS_WAND(wizard) (*wizard 0)->wand
 
-#define AND Game::and_f
-#define OR Game::or_f
-#define NOT Game::not_f
+#define AND Game::and_func
+#define OR Game::or_func
+#define NOT Game::not_func
 
-#define IF ;flag=0; if (
+#define IF ; if (
 #define ELSE_IF ;}; else if (
 #define ELSE ;}; else {
 #define DO ) Game::addActionBlock(attacker, defender, source, round_offset) = [](Wizard *attacker, Wizard *defender, Spell *source) { \
     int round_offset = 0; Action dummy;
-
-// FOR 2 ROUNDS DO
-// for (round offset=0; round_offset< 2 ; round_offset++)
-// after 2 rounds do
-// for (round_offset=0; round_offset+= 2 ; round_offset++)
-// for (round_offset=0;  if(1) round_offset+= 2 //; round_offset++)
+    
 #define FOR ; for (round_offset=0; round_offset<
 #define ROUNDS ; round_offset++
 #define AFTER ;if (round_offset=
-// define AFTER ;while(round_offset< 5 ; round_offset++) DO...
-// if ( true || round_offset=X   ;round_offset++   ) Game::addActionBlock
-//        AFTER     | X  |         ROUNDS          DO
+
 #define SHOW ;cout<<
 
 

@@ -1,7 +1,7 @@
 //
 // Created by manos on 12/24/19.
 //
-#include "Hogwards.h"
+#include "Hogwarts.h"
 
 BEGIN_GAME
 
@@ -114,6 +114,7 @@ BEGIN_GAME
     ]
     MRS "Harry Potter" LEARN [
             SPELL_NAME(DAMAGE)
+            SPELL_NAME(HEAL)
             SPELL_NAME(DOT)
             SPELL_NAME(HOT)
             SPELL_NAME(UNEQUIP)
@@ -121,19 +122,21 @@ BEGIN_GAME
     ]
     MRS "Hermione Granger" LEARN [
             SPELL_NAME(DAMAGE)
+            SPELL_NAME(HEAL)
             SPELL_NAME(DOT)
             SPELL_NAME(HOT)
             SPELL_NAME(UNEQUIP)
-            SPELL_NAME(AFTER_TEST)
     ]
     MRS "Luna Lovegood" LEARN [
             SPELL_NAME(DAMAGE)
+            SPELL_NAME(HEAL)
             SPELL_NAME(DOT)
             SPELL_NAME(HOT)
             SPELL_NAME(UNEQUIP)
     ]
     MRS "Draco Malfoy" LEARN [
             SPELL_NAME(DAMAGE)
+            SPELL_NAME(HEAL)
             SPELL_NAME(DOT)
             SPELL_NAME(HOT)
             SPELL_NAME(UNEQUIP)

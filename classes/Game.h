@@ -14,6 +14,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <memory>
 
 using namespace std;
 
@@ -39,7 +40,7 @@ public:
             cout << "Player " << defender->player_number << " (" << defender->name << ")" << endl;
         } else cout << "self" << endl;
         Action_Block ab(attacker, defender, source, 0);
-        ab = source->action;
+        ab.action = source->action;
         ab.play();
     }
 
@@ -48,18 +49,15 @@ public:
         bool replay;
         do {
             replay = false;
-//            cout << "--------------------------------SIZE: " << actions.size() << endl;
             for (auto it = actions.begin(); it != actions.end();) {
                 block = *it;
-//                cout << "--------------------------------BLOCK MIGHT BE EXECUTED " << player << " rounds:" << block->rounds_remaining << " defender:" << block->defender << " attacker:" << block->attacker << endl;
-                if (block->rounds_remaining > 0 || (/*!spellcasting_phase && block->defender != player) || (spellcasting_phase && */block->defender != player && block->attacker != player)) {
+                if (block->rounds_remaining > 0 || (/*!spellcasting_phase && block->defender != player) || (spellcasting_phase && */block->defender != player /*&& block->attacker != player*/)) {
                     it++;
                     continue;
                 }
-//                cout << "--------------------------------BLOCK IS BEING EXECUTED" << endl;
-                block->play();
+                if (!block->played) block->play();
                 actions.erase(it);
-                free(block);
+                delete block;
                 replay = true;
             }
         } while (replay);
@@ -85,7 +83,7 @@ public:
             return or_func(tmp, rest...);
     }
 
-    static bool not_f(bool arg) { return !arg; };
+    static bool not_func(bool arg) { return !arg; };
 
     static void printall() {
         Wizard::print_wizards();
@@ -101,7 +99,10 @@ public:
         return 0;
     }
     static Wizard *choose_wizard(const string& input, int player_number) {
-        for (const Wizard &w:Wizard::all_wizards) if (w.name == input) return w.choose(player_number);
+        for (const Wizard &w:Wizard::all_wizards) if (w.name == input) if (w.spells.empty()) {
+            cout << "Can't select " << w.name << " because the wizard knows no spells!" << endl;
+            return nullptr;
+        } else return w.choose(player_number);
         Wizard *w;
         try {
             int i = stoi(input);
@@ -136,6 +137,7 @@ public:
             default:
                 return true;
         }
+        for (int i=0; i<players; i++) delete wizards[i];
         exit(0);
     }
 

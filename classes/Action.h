@@ -28,7 +28,6 @@ public:
                 cout << source->name << endl;
                 break;
             case 3:
-                cout << "WAND TO EQUIP IS " << defender->wand_to_have << endl;
                 this->attacker->equip(defender, defender->wand_to_have);
                 cout << "Player " << defender->player_number << " (" << defender->name << ")'s wand is now ";
                 if (defender->wand_to_have) {
